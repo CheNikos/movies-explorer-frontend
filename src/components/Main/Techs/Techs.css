@@ -34,7 +34,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  width: 460px;
+  width: 491px;
   margin: 26px auto 0 auto;
   text-align: center;
   margin-bottom: 0;
@@ -42,15 +42,16 @@
 
 .techs__content {
   padding-top: 100px;
-  display: flex;
-  height: 90px;
   margin: auto;
 }
 
 .techs__conteiner {
   list-style-type: none;
-  display: inline-flex;
-  margin: 0 auto 0 auto;
+  display: grid;
+  grid-template-columns: 90px 90px 90px 90px 90px 90px 90px;
+  grid-template-rows: 60px;
+  gap: 10px;
+  margin: 0 295px 0 295px;
   padding-left: 0;
 }
 
@@ -59,5 +60,14 @@
   width: 90px;
   height: 60px;
   border-radius: 10px;
-  background-color: #E8E8E8;
+  background-color: #e8e8e8;
+}
+
+.techs__stack-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+  margin-top: 21px;
+  margin-bottom: 22px;
 }
