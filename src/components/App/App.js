@@ -5,10 +5,9 @@ import Main from "../Main/Main"
 // import SavedMovies from "../SavedMovies/SavedMovies.js"
 // import Profile from "../Profile.js"
 import Header from "../Header/Header"
-import Footer from '../Footer/Footer';
 // import Register from "../Register.js"
 // import Login from "../Register.js"
-// import Footer from "../Footer/Footer"
+import Footer from "../Footer/Footer"
 
 function App() {
 
