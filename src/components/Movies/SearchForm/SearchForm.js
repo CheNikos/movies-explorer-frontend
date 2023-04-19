@@ -1,4 +1,5 @@
 import "./SearchForm.css";
+import FilterCheckbox from "../../FilterCheckbox/FilterCheckbox"
 
 export default function SearchForm() {
   return (
@@ -16,8 +17,8 @@ export default function SearchForm() {
       </div>
       <div className="search-form__line"></div>
       <div className="search-form__checkbox">
-        <div className="search-form__tumb"></div>
-        <p className="search-form__filter"></p>
+        <div className="search-form__tumb"><FilterCheckbox /></div>
+        <p className="search-form__filter">Короткометражки</p>
       </div>
     </div>
   );
