@@ -48,17 +48,12 @@ margin-bottom: 8px;
 }
 
 .search-form__checkbox {
-    width: 200px;
+    width: 167px;
     height: 25px;
-    border: 1px solid red;
     margin: 32px auto 0 70px;
     padding-bottom: 47px;
     display: flex;
     justify-content: space-between;
-}
-
-.search-form__tumb {
-  border: 1px solid red;
 }
 
 .search-form__filter {

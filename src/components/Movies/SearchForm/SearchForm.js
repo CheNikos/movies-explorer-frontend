@@ -17,7 +17,7 @@ export default function SearchForm() {
       </div>
       <div className="search-form__line"></div>
       <div className="search-form__checkbox">
-        <div className="search-form__tumb"><FilterCheckbox /></div>
+        <div><FilterCheckbox /></div>
         <p className="search-form__filter">Короткометражки</p>
       </div>
     </div>
