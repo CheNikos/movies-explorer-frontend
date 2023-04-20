@@ -1,9 +1,16 @@
 .header {
   height: 74px;
   max-width: 1280px;
-  background-color: #dddee3;
   display: flex;
   justify-content: space-between;
+}
+
+.header_theme_main {
+  background-color: #dddee3;
+}
+
+.header_theme_grey {
+  background-color: #fafafa;
 }
 
 .header__logo {
@@ -49,4 +56,41 @@
   margin-top: 8px;
   text-align: center;
   color: rgba(255, 255, 255, 1);
+}
+
+.header__account {
+  width: 100px;
+  height: 32px;
+  left: 1110px;
+  top: 21px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  background: #f4f4f4;
+  border-radius: 20px;
+  border: none;
+}
+
+.header__navigation-bar {
+  width: 227px;
+  height: 20px;
+  display: flex;
+  align-self: center;
+}
+
+.header__film {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  border: none;
+  background-color: #fafafa;
+}
+
+.header__saved-films {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  border: none;
+  background-color: #fafafa;
 }

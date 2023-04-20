@@ -1,11 +1,12 @@
 .search-form {
   display: block;
+  
+  padding-top: 70px;
 }
 
 .search-form__search {
   width: 1140px;
   height: 34px;
-  padding-top: 70px;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -17,7 +18,7 @@
   line-height: 34px;
   width: 1060px;
   border: none;
-  background-color: #fafafa;
+  background-color: #FAFAFA;
 }
 
 .search-form__find {
