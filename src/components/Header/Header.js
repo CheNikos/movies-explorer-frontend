@@ -10,15 +10,14 @@ export default function Header() {
       location.pathname === '/' ? 'main' : 'grey'
     }`}>
       <img className="header__logo" src={logo} alt="Logo" />
-      {location.pathname === "/" && (
+      {location.pathname === "/" ? (
         <div className="header__navigate">
           <p className="header__registration">Регистрация</p>
           <div className="header__signin">
             <p className="header__signin-text">Войти</p>
           </div>
         </div>
-      )}
-      {location.pathname === "/movies" && (
+      ) : (
         <>
         <div className="header__navigation-bar">
           <button className="header__film">Фильмы</button>

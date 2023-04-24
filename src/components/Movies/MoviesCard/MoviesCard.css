@@ -33,6 +33,25 @@
   cursor: pointer;
 }
 
+.movies-card__like-delete {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  background-color: #FAFAFA;
+}
+
+.movies-card__like-delete:hover {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../images/card-image/d1.svg);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  display: block;
+}
+
 .movies-card__line {
   width: 270px;
   border-bottom: 1px solid #e8e8e8;
