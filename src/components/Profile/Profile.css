@@ -1,3 +1,78 @@
 .profile {
-    
+  height: 650px;
+  width: 1280px;
+  background-color: #ffffff;
+}
+
+.profile__container {
+  margin: 0 auto 0 auto;
+  width: 410px;
+  display: block;
+  padding-top: 74px;
+}
+
+.profile__title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.profile__form {
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 410px;
+}
+
+.profile__input-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+.profile__input {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  border: none;
+  width: 122px;
+  text-align: end;
+}
+
+.profile__input-content:first-child {
+  margin-top: 123px;
+}
+
+.profile__line {
+  border-bottom: 1px solid #e8e8e8;
+  margin-top: 16px;
+  width: 410px;
+}
+
+.profile__edit {
+  margin-top: 220px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  background-color: #FFFFFF;
+}
+
+.profile__exit {
+  width: 410px;
+  margin: 16px auto 0 auto;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  color: rgba(238, 52, 101, 1);
+  background-color: #FFFFFF;
 }
