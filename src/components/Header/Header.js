@@ -7,7 +7,9 @@ export default function Header() {
 
   return (
     <>
-      {location.pathname === "/signup" || location.pathname === "/signin" ? (
+      {location.pathname === "/signup" ||
+      location.pathname === "/signin" ||
+      location.pathname === "/*" ? (
         <></>
       ) : (
         <header

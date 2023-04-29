@@ -6,6 +6,7 @@ import SavedMovies from "../Saved-movies/Saved-movies.js";
 import Profile from "../Profile/Profile.js";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import PageNotFound from "../PageNotFound/PageNotFound";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
