@@ -7,15 +7,17 @@
 
 .error__container {
   padding-top: 246px;
+  margin-bottom: 60px;
 }
 
 .error__description {
-    display: block;
+  display: block;
+  margin-bottom: 184px;
 }
 
 .error__title {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   font-size: 140px;
   font-weight: 400;
   line-height: 169px;
@@ -32,12 +34,11 @@
 }
 
 .error__link {
-font-size: 14px;
-font-weight: 400;
-line-height: 17px;
-text-align: center;
-color: rgba(52, 86, 243, 1);
-margin: 184px auto 60px auto;
-text-decoration: none;
-cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+  color: rgba(52, 86, 243, 1);
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -9,7 +9,7 @@ export default function Header() {
     <>
       {location.pathname === "/signup" ||
       location.pathname === "/signin" ||
-      location.pathname === "/*" ? (
+      location.pathname === '*' ? (
         <></>
       ) : (
         <header
