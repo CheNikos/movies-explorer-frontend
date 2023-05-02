@@ -56,7 +56,10 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
+  position: absolute;
   margin: 99px 0 0 70px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
 }
 
 .about-me__image {

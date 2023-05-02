@@ -11,9 +11,9 @@ export default function SearchForm() {
           placeholder="Фильм"
           className="search-form__input"
         />
-        <div className="search-form__find">
+        <button className="search-form__find">
             <p className="search-form__text">Найти</p>
-        </div>
+        </button>
       </div>
       <div className="search-form__line"></div>
       <div className="search-form__checkbox">

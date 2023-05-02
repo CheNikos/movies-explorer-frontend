@@ -79,6 +79,11 @@
   line-height: 17px;
   text-align: center;
   color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.signup__edit:hover {
+  opacity: 80%;
 }
 
 .signup__footer {
@@ -97,4 +102,9 @@
   color: rgba(52, 86, 243, 1);
   border: none;
   background-color: #ffffff;
+  cursor: pointer;
+}
+
+.signup__signin:hover {
+  opacity: 70%;
 }

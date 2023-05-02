@@ -17,7 +17,7 @@ export default function AboutMe() {
             компании «ХБ Нева». На данный момент прохожу курс веб-разработки от
             Яндекс.Практикума.
           </p>
-          <p className="about-me__github">Github https://github.com/CheNikos</p>
+          <a href="https://github.com/CheNikos" target="blank" className="about-me__github">Github</a>
         </div>
         <img src={photo} className="about-me__image" alt="Моё фото" />
       </div>

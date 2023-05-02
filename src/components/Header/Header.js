@@ -1,6 +1,6 @@
 import "./Header.css";
-import logo from "../../images/header-image/logo.svg";
-import { useLocation } from "react-router-dom";
+// import logo from "../../images/header-image/logo.svg";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Header() {
   const location = useLocation();
@@ -9,7 +9,7 @@ export default function Header() {
     <>
       {location.pathname === "/signup" ||
       location.pathname === "/signin" ||
-      location.pathname === '*' ? (
+      location.pathname === "*" ? (
         <></>
       ) : (
         <header
@@ -17,25 +17,39 @@ export default function Header() {
             location.pathname === "/" ? "main" : "grey"
           }`}
         >
-          <img className="header__logo" src={logo} alt="Logo" />
+          <Link to={"/"} className="header__logo"></Link>
           {location.pathname === "/" ? (
             <div className="header__navigate">
-              <p className="header__registration">Регистрация</p>
-              <div className="header__signin">
+              <Link to={"/signup"} className="header__registration">
+                Регистрация
+              </Link>
+              <Link to={"/signin"} className="header__signin">
                 <p className="header__signin-text">Войти</p>
-              </div>
+              </Link>
             </div>
           ) : (
             <>
               <div className="header__navigation-bar">
-                <button className="header__film">Фильмы</button>
-                <button className="header__saved-films">
-                  Сохранённые фильмы
-                </button>
+                <Link to={"/movies"}>
+                  <button
+                    className={`header__film header__film_${
+                      location.pathname === "/movies" ? "active" : ""
+                    }`}
+                  >
+                    Фильмы
+                  </button>
+                </Link>
+                <Link to={"/saved-movies"}>
+                  <button className={`header__saved-films header__saved-films_${
+                      location.pathname === "/saved-movies" ? "active" : ""
+                    }`}>
+                    Сохранённые фильмы
+                  </button>
+                </Link>
               </div>
-              <div className="header__navigate">
+              <Link to={"/profile"} className="header__navigate">
                 <button className="header__account">Аккаунт</button>
-              </div>
+              </Link>
             </>
           )}
         </header>

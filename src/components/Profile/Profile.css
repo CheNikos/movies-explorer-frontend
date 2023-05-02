@@ -63,6 +63,7 @@
   text-align: center;
   border: none;
   background-color: #FFFFFF;
+  cursor: pointer;
 }
 
 .profile__exit {
@@ -75,4 +76,5 @@
   border: none;
   color: rgba(238, 52, 101, 1);
   background-color: #FFFFFF;
+  cursor: pointer;
 }

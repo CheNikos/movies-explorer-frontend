@@ -17,12 +17,19 @@
   width: 38px;
   height: 38px;
   margin: 18px 0 18px 70px;
+  background-image: url("../../images/header-image/logo.svg");
+  border-radius: 20px;
+}
+
+.header__logo:hover {
+  opacity: 80%;
 }
 
 .header__navigate {
   display: flex;
   margin-right: 70px;
   align-self: center;
+  text-decoration: none;
 }
 
 .header__registration {
@@ -34,6 +41,8 @@
   margin-top: 8px;
   margin-bottom: 8px;
   margin-right: 30px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
 }
 
 .header__signin {
@@ -45,6 +54,11 @@
   border-radius: 3px;
   width: 76px;
   height: 32px;
+  text-decoration: none;
+}
+
+.header__signin:hover {
+  opacity: 80%;
 }
 
 .header__signin-text {
@@ -70,6 +84,7 @@
   background: #f4f4f4;
   border-radius: 20px;
   border: none;
+  cursor: pointer;
 }
 
 .header__navigation-bar {
@@ -81,10 +96,15 @@
 
 .header__film {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 18px;
   border: none;
   background-color: #fafafa;
+  cursor: pointer;
+}
+
+.header__film_active {
+  font-weight: 500;
 }
 
 .header__saved-films {
@@ -93,4 +113,9 @@
   line-height: 18px;
   border: none;
   background-color: #fafafa;
+  cursor: pointer;
+}
+
+.header__saved-films_active {
+  font-weight: 500;
 }
