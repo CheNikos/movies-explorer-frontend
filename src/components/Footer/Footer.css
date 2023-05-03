@@ -44,3 +44,58 @@
   font-weight: 400;
   line-height: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .footer__line {
+    width: 708px;
+  }
+
+  .footer__stroke {
+    margin: 20px 0 0 30px;
+    width: 708px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    padding-bottom: 20px;
+  }
+
+  .footer__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__line {
+    width: 300px;
+    margin: 21px auto 0 auto;
+  }
+
+  .footer__stroke {
+    margin: 30px auto 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    text-align: center;
+    width: 300px;
+  }
+
+  .footer__date {
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(160, 160, 160, 1);
+    margin: 30px auto auto auto;
+  }
+
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 12px auto auto auto;
+  }
+
+  .footer__link-git {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
