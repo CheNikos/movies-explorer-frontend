@@ -15,7 +15,7 @@ export default function MoviesCard() {
             {location.pathname === "/saved-movies" && (<button className="movies-card__like-delete"></button>)}
         </div>
         <div className="movies-card__line"></div>
-        <p className="movies-card__time">1ч42м</p>
+        <p className="movies-card__time">1ч 42м</p>
     </div>
   );
 }

@@ -21,3 +21,31 @@
   line-height: 15px;
   text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+  .movies__more {
+    width: 768px;
+  }
+  
+  .movies__more-button {
+    width: 708px;
+    margin-left: 30px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies__more {
+    width: 320px;
+    margin: auto;
+    padding-top: 61px;
+    padding-bottom: 89px;
+  }
+  
+  .movies__more-button {
+    height: 36px;
+    width: 300px;
+    margin-left: 10px;
+  }
+}
