@@ -75,7 +75,8 @@
 
 @media screen and (max-width: 768px) {
   .movies-card {
-    width: 339px;
+    max-width: 339px;
+    margin-left: 30px;
   }
 
   .movies-card__image {
@@ -96,6 +97,7 @@
 @media screen and (max-width: 320px) {
   .movies-card {
     width: 300px;
+    margin-left: 10px;
   }
 
   .movies-card__image {

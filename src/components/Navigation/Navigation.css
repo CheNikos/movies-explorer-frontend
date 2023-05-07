@@ -58,15 +58,13 @@
   border-radius: 20px;
   border: none;
   cursor: pointer;
-  margin: 21px 70px 0 0;
+  margin-left: 364px;
+  margin-right: 70px;
 }
 
 .navigation__navigation-bar {
-  width: 227px;
-  height: 20px;
   display: flex;
   align-self: center;
-  margin-left: 55px;
 }
 
 .navigation__film {
@@ -97,45 +95,32 @@
   font-weight: 500;
 }
 
+.navigation__burger {
+  background-image: url(../../images/header-image/icon__burger.svg);
+  width: 44px;
+  height: 44px;
+  display: none;
+  margin-top: 15px;
+  margin-right: 30px;
+  border: none;
+  background-color: #fafafa;
+}
+
+
 @media screen and (max-width: 768px) {
-  .navigation__content {
-    margin-right: 30px;
+  .navigation__navigation-bar {
+    display: none;
   }
 
-  .navigation__signin {
-    left: 86.2%;
-    right: 3.91%;
-    top: 2.29%;
-    bottom: 94.23%;
+  .navigation__burger {
+    display: block;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .navigation__content {
+  .navigation__burger {
+    width: 40px;
+    height: 43px;
     margin-right: 14px;
-  }
-
-  .navigation__registration {
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 16px;
-    margin-right: 14px;
-  }
-
-  .navigation__signin {
-    left: 78.75%;
-    right: 4.38%;
-    top: 3.41%;
-    bottom: 92.9%;
-    width: 54px;
-    height: 26px;
-  }
-
-  .navigation__signin-text {
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 16px;
-    margin-bottom: 5px;
-    margin-top: 5px;
   }
 }

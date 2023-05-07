@@ -1,12 +1,19 @@
 import "./Navigation.css";
 import { useLocation, Link } from "react-router-dom";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import { useState } from "react";
 
 export default function Navigation() {
   const location = useLocation();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  function handleClick() {
+    setMenuOpen(!isMenuOpen);
+  }
 
   return (
     <>
-    {location.pathname === "/" ? (
+      {location.pathname === "/" ? (
         <div className="navigation__content">
           <Link to={"/signup"} className="navigation__registration">
             Регистрация
@@ -28,18 +35,23 @@ export default function Navigation() {
               </button>
             </Link>
             <Link to={"/saved-movies"}>
-              <button className={`navigation__saved-films navigation__saved-films_${
+              <button
+                className={`navigation__saved-films navigation__saved-films_${
                   location.pathname === "/saved-movies" ? "active" : ""
-                }`}>
+                }`}
+              >
                 Сохранённые фильмы
               </button>
             </Link>
+            <Link to={"/profile"} className="navigation__navigate">
+              <button className="navigation__account">Аккаунт</button>
+            </Link>
           </div>
-          <Link to={"/profile"} className="navigation__navigate">
-            <button className="navigation__account">Аккаунт</button>
-          </Link>
+          <div className="navigation__burger" onClick={handleClick}>
+            <BurgerMenu burger={isMenuOpen}/>
+          </div>
         </>
       )}
-      </>
+    </>
   );
 }

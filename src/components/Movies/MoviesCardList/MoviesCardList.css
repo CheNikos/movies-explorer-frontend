@@ -9,17 +9,15 @@
 
 @media screen and (max-width: 768px) {
     .movies-cards {
-        width: 768px;
+        max-width: 768px;
         grid-template-columns: 339px 339px ;
-        gap: 30px 30px;
-        margin: 0 30px 0 30px;
+        gap: 30px;
     }
   }
   
   @media screen and (max-width: 320px) {
     .movies-cards {
-        width: 320px;
-        padding: 0 10px 0 10px;
+        max-width: 320px;
         margin: 0;
         padding-top: 40px;
         grid-template-columns: 300px ;
