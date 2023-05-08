@@ -14,7 +14,7 @@
 }
 
 .portfolio__website {
-  width: 1140px;
+  max-width: 1140px;
   margin: 20px 0 0 70px;
   display: flex;
   justify-content: space-between;
@@ -37,7 +37,7 @@
 }
 
 .portfolio__line {
-  width: 1140px;
+  max-width: 1140px;
   border-bottom: 1px solid #e8e8e8;
   margin: 19px auto 0 auto;
 }
@@ -54,7 +54,7 @@
   }
 
   .portfolio__website {
-    width: 668px;
+    max-width: 668px;
     margin: 20px 0 0 50px;
   }
 
@@ -69,7 +69,7 @@
   }
 
   .portfolio__line {
-    width: 668px;
+    max-width: 668px;
   }
 }
 
@@ -87,7 +87,7 @@
   }
 
   .portfolio__website {
-    width: 292px;
+    max-width: 292px;
     margin: 20px 0 0 14px;
   }
 
@@ -104,6 +104,6 @@
   }
 
   .portfolio__line {
-    width: 292px;
+    max-width: 292px;
   }
 }

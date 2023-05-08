@@ -1,5 +1,4 @@
 import "./AboutMe.css";
-import photo from "../../../images/aboutme-image/108144224.jpg";
 
 export default function AboutMe() {
   return (
@@ -19,7 +18,7 @@ export default function AboutMe() {
           </p>
           <a href="https://github.com/CheNikos" target="blank" className="about-me__github">Github</a>
         </div>
-        <img src={photo} className="about-me__image" alt="Моё фото" />
+        <div className="about-me__image" alt="Моё фото" />
       </div>
     </div>
   );

@@ -13,11 +13,11 @@
   width: 600px;
   margin-top: 0px;
   margin-bottom: 0;
-  padding: 110px 610px 0 70px;
+  padding: 110px 0 0 70px;
 }
 
 .about-project__line {
-  width: 1140px;
+  max-width: 1140px;
   border-bottom: 1px solid black;
   margin: 23px auto 0 auto;
 }
@@ -51,7 +51,7 @@
 }
 
 .about-project__stage {
-  width: 1140px;
+  max-width: 1140px;
   height: 36px;
   margin: 110px auto 0 auto;
   display: flex;
@@ -90,7 +90,7 @@
 }
 
 .about-project__subtext {
-  width: 1140px;
+  max-width: 1140px;
   height: 36px;
   margin: auto;
   display: flex;
@@ -120,13 +120,13 @@
   }
 
   .about-project__title {
-    margin-top: 0px;
-    margin-bottom: 0;
-    padding: 90px 118px 0 50px;
+    margin: 0 0 0 0;
+    padding: 90px 0 0 50px;
+    max-width: fit-content;
   }
 
   .about-project__line {
-    width: 668px;
+    max-width: 668px;
     margin: 23px auto 0 auto;
   }
 
@@ -157,7 +157,7 @@
   }
 
   .about-project__stage {
-    width: 668px;
+    max-width: 668px;
     height: 36px;
     margin: 93px auto 0 auto;
     display: flex;
@@ -196,7 +196,7 @@
   }
 
   .about-project__subtext {
-    width: 668px;
+    max-width: 668px;
     height: 36px;
     margin: auto;
     display: flex;
@@ -229,7 +229,7 @@
   .about-project__title {
     margin-top: 0px;
     margin-bottom: 0;
-    padding: 70px 18px 0 18px;
+    padding: 70px 0 0 18px;
     font-size: 18px;
     line-height: 22px;
     max-width: 284px;
