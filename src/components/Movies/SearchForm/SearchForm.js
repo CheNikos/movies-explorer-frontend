@@ -10,6 +10,7 @@ export default function SearchForm() {
           name="name_movies"
           placeholder="Фильм"
           className="search-form__input"
+          required
         />
         <button className="search-form__find">
             <p className="search-form__text">Найти</p>
