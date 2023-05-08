@@ -27,7 +27,7 @@
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
-    width: 396px;
+    max-width: 396px;
   }
   
   .signin__input-content {

@@ -13,7 +13,6 @@ export default function SearchForm() {
           required
         />
         <button className="search-form__find">
-            <p className="search-form__text">Найти</p>
         </button>
       </div>
       <div className="search-form__line"></div>

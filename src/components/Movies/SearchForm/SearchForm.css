@@ -5,7 +5,7 @@
 }
 
 .search-form__search {
-  width: 1140px;
+  max-width: 1140px;
   height: 34px;
   margin: auto;
   display: flex;
@@ -16,7 +16,7 @@
   font-size: 28px;
   font-weight: 500;
   line-height: 34px;
-  width: 1060px;
+  max-width: 1060px;
   border: none;
   background-color: #fafafa;
 }
@@ -29,14 +29,11 @@
 }
 
 .search-form__find {
-  width: 58px;
+  width: 80px;
   height: 34px;
-  left: 26.69%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: #3456f3;
-  border-radius: 48px;
+  background-image: url(../../../images/movies-image/find.svg);
+  background-color: #fafafa;
+  background-repeat: no-repeat;
   cursor: pointer;
   border: none;
 }
@@ -45,18 +42,8 @@
   opacity: 80%;
 }
 
-.search-form__text {
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 18px;
-  text-align: center;
-  color: rgba(255, 255, 255, 1);
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
 .search-form__line {
-  width: 1140px;
+  max-width: 1140px;
   border-bottom: 1px solid #e8e8e8;
   margin: 13px auto 0 auto;
 }
@@ -83,16 +70,17 @@
   }
 
   .search-form__search {
-    width: 708px;
-    margin: auto;
+    max-width: 708px;
+    margin-right: 30px;
+    margin-left: 30px;
   }
 
   .search-form__input {
-    width: 628px;
+    max-width: 200px;
   }
 
   .search-form__line {
-    width: 708px;
+    max-width: 708px;
     margin: 12px auto 0 auto;
   }
 
@@ -119,7 +107,7 @@
   }
 
   .search-form__search {
-    width: 292px;
+    max-width: 292px;
     margin: auto;
     display: flex;
     justify-content: space-between;

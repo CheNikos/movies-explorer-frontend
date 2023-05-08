@@ -1,16 +1,16 @@
 .movies-cards {
-    width: 1140px;
+    max-width: 1140px;
     margin: auto;
     padding-top: 70px;
-    display: grid;
-    grid-template-columns: 270px 270px 270px 270px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 38px 20px;
 }
 
 @media screen and (max-width: 768px) {
     .movies-cards {
-        max-width: 768px;
-        grid-template-columns: 339px 339px ;
+        max-width: 708px; 
         gap: 30px;
     }
   }
