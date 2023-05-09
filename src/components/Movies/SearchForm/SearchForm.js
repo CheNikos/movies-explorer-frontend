@@ -4,7 +4,7 @@ import FilterCheckbox from "../../FilterCheckbox/FilterCheckbox"
 export default function SearchForm() {
   return (
     <div className="search-form">
-      <div className="search-form__search">
+      <form className="search-form__search">
         <input
           type="text"
           name="name_movies"
@@ -14,7 +14,7 @@ export default function SearchForm() {
         />
         <button className="search-form__find">
         </button>
-      </div>
+      </form>
       <div className="search-form__line"></div>
       <div className="search-form__checkbox">
         <div><FilterCheckbox /></div>

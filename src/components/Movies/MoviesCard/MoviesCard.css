@@ -1,5 +1,13 @@
 .movies-card {
   width: 270px;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.movies-card__list {
+  display: block;
 }
 
 .movies-card__image {
@@ -93,7 +101,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 324px) {
   .movies-card {
     width: 300px;
     margin-left: 10px;

@@ -16,10 +16,15 @@
 .portfolio__website {
   max-width: 1140px;
   margin: 20px 0 0 70px;
-  display: flex;
-  justify-content: space-between;
+  padding-left: 0;
+  list-style-type: none;
   text-decoration: none;
   color: rgba(0, 0, 0, 1);
+}
+
+.portfolio__list {
+  display: flex;
+  justify-content: space-between;
 }
 
 .portfolio__text {

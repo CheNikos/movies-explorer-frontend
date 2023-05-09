@@ -101,7 +101,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 325px) {
   .search-form {
     padding-top: 90px;
   }

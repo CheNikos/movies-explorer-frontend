@@ -4,12 +4,12 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
 export default function Movies() {
   return (
-    <section className="movies">
+    <main className="movies">
       <SearchForm />
       <MoviesCardList />
       <div className="movies__more">
         <button className="movies__more-button">Ещё</button>
       </div>
-    </section>
+    </main>
   );
 }
