@@ -1,10 +1,9 @@
 .movies-cards {
   max-width: 1140px;
-  margin: auto;
+  justify-content: center;
   padding-top: 70px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 270px);
   gap: 38px 20px;
   padding-left: 70px;
   padding-right: 70px;
