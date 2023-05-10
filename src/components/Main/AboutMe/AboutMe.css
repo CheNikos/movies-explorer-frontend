@@ -17,16 +17,16 @@
 .about-me__line {
   max-width: 1140px;
   border-bottom: 1px solid black;
-  margin: 23px auto 0 auto;
+  margin: 23px 70px 0 70px;
 }
 
 .about-me__content {
   display: flex;
+  justify-content: space-between;
 }
 
 .about-me__student {
   max-width: 600px;
-  margin-right: 49px;
 }
 
 .about-me__name {
@@ -50,7 +50,8 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  margin: 26px 0 99px 70px;
+  max-width: 600px;
+  margin: 26px 49px 0 70px;
 }
 
 .about-me__github {
@@ -66,12 +67,12 @@
   width: 270px;
   height: 327px;
   border-radius: 10px;
-  object-fit: cover;
-  margin: 66px 70px 0 auto;
+  object-fit: contain;
   background-image: url(../../../images/aboutme-image/108144224.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 66px 70px 0 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -83,6 +84,7 @@
 
   .about-me__line {
     max-width: 668px;
+    margin: 23px 50px 0 50px;
   }
 
   .about-me__content {
@@ -98,19 +100,21 @@
 
   .about-me__name {
     text-align: left;
-    margin: 66px 0 0 50px;
+    margin: 66px 20px 0 50px;
     font-size: 40px;
     line-height: 40px;
+    max-width: 348px;
   }
 
   .about-me__subname {
-    margin: 16px 0 0 50px;
+    margin: 16px 20px 0 50px;
     font-size: 12px;
     line-height: 18px;
+    max-width: 348px;
   }
 
   .about-me__info {
-    margin: 20px 0 87px 50px;
+    margin: 20px 49px 87px 50px;
     font-size: 12px;
     line-height: 18px;
     max-width: 364px;
@@ -123,7 +127,7 @@
   .about-me__image {
     width: 255px;
     height: 307px;
-    margin: 66px 0 0 auto;
+    margin: 66px 50px 0 0;
   }
 }
 
@@ -139,7 +143,7 @@
 
   .about-me__line {
     width: 292px;
-    margin: 28px auto 0 auto;
+    margin: 28px 14px 0 14px;
   }
 
   .about-me__content {
@@ -177,6 +181,6 @@
     width: 292px;
     height: 352px;
     object-fit: cover;
-    margin: 60px auto 0 auto;
+    margin: 60px 14px 0 14px;
   }
 }

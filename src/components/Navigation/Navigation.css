@@ -45,11 +45,24 @@
   color: rgba(255, 255, 255, 1);
 }
 
+.navigation__navigation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 70px;
+  width: 676px;
+}
+
+.navigation__list {
+  display: flex;
+  list-style-type: none;
+  margin: 0 0 0 0;
+  padding-left: 0;
+}
+
 .navigation__account {
   width: 100px;
   height: 32px;
-  left: 1110px;
-  top: 21px;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -58,13 +71,7 @@
   border-radius: 20px;
   border: none;
   cursor: pointer;
-  margin-left: 364px;
-  margin-right: 70px;
-}
-
-.navigation__navigation-bar {
-  display: flex;
-  align-self: center;
+  padding: 0;
 }
 
 .navigation__film {
