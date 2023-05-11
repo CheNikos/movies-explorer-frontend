@@ -12,18 +12,21 @@
 @media screen and (max-width: 768px) {
   .movies-cards {
     max-width: 708px;
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, 339px);
+    gap: 30px 30px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .movies-cards {
-    max-width: 320px;
-    margin: 0;
+    max-width: 370px;
     padding-top: 40px;
-    grid-template-columns: 300px;
+    grid-template-columns: repeat(auto-fill, 300px);
     gap: 34px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-right: 0;
   }
 }

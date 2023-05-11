@@ -6,7 +6,7 @@
 
 .movies__more {
   max-width: 1140px;
-  margin: auto;
+  margin: 0 70px 0 70px;
   padding-top: 50px;
   padding-bottom: 80px;
   text-align: center;
@@ -14,7 +14,7 @@
 
 .movies__more-button {
   height: 36px;
-  max-width: 1140px;
+  width: 100%;
   background-color: #f4f4f4;
   border-radius: 6px;
   border: none;
@@ -22,6 +22,8 @@
   font-weight: 500;
   line-height: 15px;
   text-align: center;
+  margin-left: 0;
+  padding: 0 0 0 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -31,26 +33,20 @@
 
   .movies__more {
     max-width: 768px;
-  }
-  
-  .movies__more-button {
-    max-width: 708px;
-    padding-left: 0;
-    padding-right: 0;
+
+    margin: 0 30px 0 30px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .movies__more {
-    width: 320px;
-    margin: auto;
+    max-width: 320px;
+    margin: 0 10px 0 10px;
     padding-top: 61px;
     padding-bottom: 89px;
   }
-  
+
   .movies__more-button {
     height: 36px;
-    width: 300px;
-    margin-left: 10px;
   }
 }

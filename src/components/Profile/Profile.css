@@ -1,12 +1,13 @@
 .profile {
-  height: 650px;
-  width: 1280px;
+  max-width: 1280px;
   background-color: #ffffff;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .profile__container {
   margin: 0 auto 0 auto;
-  width: 410px;
+  max-width: 410px;
   display: block;
   padding-top: 74px;
 }
@@ -24,7 +25,8 @@
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
-  width: 410px;
+  max-width: 410px;
+  width: 100%;
 }
 
 .profile__input-content {
@@ -52,7 +54,7 @@
 .profile__line {
   border-bottom: 1px solid #e8e8e8;
   margin-top: 16px;
-  width: 410px;
+  max-width: 410px;
 }
 
 .profile__edit {
@@ -67,7 +69,8 @@
 }
 
 .profile__exit {
-  width: 410px;
+  max-width: 410px;
+  width: 100%;
   margin: 16px auto 0 auto;
   font-size: 13px;
   font-weight: 500;
@@ -81,7 +84,7 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    width: 768px;
+    max-width: 768px;
   }
 
   .profile__container {
@@ -103,11 +106,11 @@
 
 @media screen and (max-width: 320px) {
   .profile {
-    width: 320px;
+    max-width: 320px;
   }
 
   .profile__container {
-    width: 260px;
+    max-width: 260px;
     padding-top: 70px;
   }
 

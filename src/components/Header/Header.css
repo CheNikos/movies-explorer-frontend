@@ -2,7 +2,6 @@
   height: 74px;
   max-width: 1280px;
   display: flex;
-  justify-content: space-between;
 }
 
 .header_theme_main {

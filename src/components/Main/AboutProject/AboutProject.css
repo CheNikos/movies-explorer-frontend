@@ -1,7 +1,8 @@
 .about-project {
-  height: 608px;
   background-color: #fafafa;
   display: block;
+  padding-top: 110px;
+  padding-bottom: 110px;
 }
 
 .about-project__title {
@@ -13,13 +14,13 @@
   width: 600px;
   margin-top: 0px;
   margin-bottom: 0;
-  padding: 110px 0 0 70px;
+  padding: 0 0 0 70px;
 }
 
 .about-project__line {
   max-width: 1140px;
   border-bottom: 1px solid black;
-  margin: 23px auto 0 auto;
+  margin: 23px 70px 0 70px;
 }
 
 .about-project__content {
@@ -29,7 +30,12 @@
 }
 
 .about-project__container {
-  width: 550px;
+  max-width: 550px;
+  margin-right: 40px;
+}
+
+.about-project__container:last-child {
+  margin-right: 0;
 }
 
 .about-project__text {
@@ -53,7 +59,7 @@
 .about-project__stage {
   max-width: 1140px;
   height: 36px;
-  margin: 110px auto 0 auto;
+  margin: 110px 70px 0 70px;
   display: flex;
   text-align: center;
 }
@@ -92,9 +98,10 @@
 .about-project__subtext {
   max-width: 1140px;
   height: 36px;
-  margin: auto;
   display: flex;
   text-align: center;
+  margin-left: 70px;
+  margin-right: 70px;
 }
 
 .about-project__subtext-complete {
@@ -116,18 +123,19 @@
 
 @media screen and (max-width: 768px) {
   .about-project {
-    height: 585px;
+    padding-top: 90px;
+    padding-bottom: 90px;
   }
 
   .about-project__title {
     margin: 0 0 0 0;
-    padding: 90px 0 0 50px;
+    padding: 0 0 0 50px;
     max-width: fit-content;
   }
 
   .about-project__line {
     max-width: 668px;
-    margin: 23px auto 0 auto;
+    margin: 23px 50px 0 50px;
   }
 
   .about-project__content {
@@ -159,7 +167,7 @@
   .about-project__stage {
     max-width: 668px;
     height: 36px;
-    margin: 93px auto 0 auto;
+    margin: 93px 50px 0 50px;
     display: flex;
     text-align: center;
   }
@@ -198,9 +206,10 @@
   .about-project__subtext {
     max-width: 668px;
     height: 36px;
-    margin: auto;
     display: flex;
     text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
   .about-project__subtext-complete {
@@ -221,15 +230,60 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .about-project__stage-complete-text {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__stage-waiting-text {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__stage-subtext-text {
+    margin-bottom: 70px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 13px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .about-project__text {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+  }
+
+  .about-project__info {
+    margin-top: 16px;
+    margin-bottom: 0;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .about-project {
-    height: 641px;
+    padding-top: 70px;
+    padding-bottom: 70px;
   }
 
   .about-project__title {
     margin-top: 0px;
     margin-bottom: 0;
-    padding: 70px 0 0 18px;
+    padding: 0 0 0 18px;
     font-size: 18px;
     line-height: 22px;
     max-width: 284px;
@@ -237,7 +291,7 @@
 
   .about-project__line {
     width: 284px;
-    margin: 28px auto 0 auto;
+    margin: 28px 18px 0 18px;
   }
 
   .about-project__content {
@@ -249,26 +303,8 @@
     max-width: 284px;
   }
 
-  .about-project__text {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 22px;
-    text-align: left;
-  }
-
   .about-project__container:last-child {
     margin-top: 56px;
-  }
-
-  .about-project__info {
-    margin-top: 16px;
-    margin-bottom: 0;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 16px;
   }
 
   .about-project__stage {
@@ -285,23 +321,11 @@
     width: 184px;
   }
 
-  .about-project__stage-complete-text {
-    margin-top: 11px;
-    margin-bottom: 11px;
-    font-size: 11px;
-    line-height: 13px;
-  }
-
-  .about-project__stage-waiting-text {
-    margin-top: 11px;
-    margin-bottom: 11px;
-    font-size: 11px;
-    line-height: 13px;
-  }
-
   .about-project__subtext {
     width: 284px;
     height: 36px;
+    margin-left: 18px;
+    margin-right: 18px;
   }
 
   .about-project__subtext-complete {
@@ -310,13 +334,5 @@
 
   .about-project__subtext-waiting {
     width: 184px;
-  }
-
-  .about-project__stage-subtext-text {
-    margin-bottom: 70px;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 13px;
-    text-align: center;
   }
 }

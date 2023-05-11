@@ -36,7 +36,7 @@
 }
 
 .burger__content {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #fafafa;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -88,21 +88,25 @@
 }
 
 .burger__account {
-  font-style: normal;
-  font-weight: 500;
+  width: 100px;
+  height: 32px;
   font-size: 14px;
+  font-weight: 500;
   line-height: 16px;
+  background: #f4f4f4;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-  margin: 500px auto auto auto;
-  text-decoration: none;
-  width: fit-content;
-  display: block;
+  margin: 621px auto 0 auto;
 }
 
 .burger__account_active {
-    border-bottom: 2px solid #000000;
-  }
+  border-bottom: 2px solid #000000;
+}
 
 @media screen and (max-width: 320px) {
   .burger__close {

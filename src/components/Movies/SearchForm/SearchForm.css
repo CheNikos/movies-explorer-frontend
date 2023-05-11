@@ -18,6 +18,7 @@
   font-weight: 500;
   line-height: 34px;
   max-width: 1060px;
+  padding: 0;
   border: none;
   background-color: #fafafa;
 }
@@ -74,8 +75,6 @@
 
   .search-form__search {
     max-width: 708px;
-    margin-right: 30px;
-    margin-left: 30px;
   }
 
   .search-form__input {
@@ -104,7 +103,7 @@
   }
 }
 
-@media screen and (max-width: 325px) {
+@media screen and (max-width: 375px) {
   .search-form {
     padding-top: 90px;
     padding-left: 14px;

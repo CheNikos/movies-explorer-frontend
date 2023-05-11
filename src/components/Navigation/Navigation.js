@@ -14,7 +14,7 @@ export default function Navigation() {
   return (
     <>
       {location.pathname === "/" ? (
-        <div className="navigation__content">
+        <div className="navigation">
           <Link to={"/signup"} className="navigation__registration">
             Регистрация
           </Link>
@@ -24,37 +24,39 @@ export default function Navigation() {
         </div>
       ) : (
         <>
-          <div className="navigation__navigation-bar">
-            <ul className="navigation__list">
-              <li>
-                <Link to={"/movies"}>
-                  <button
-                    className={`navigation__film navigation__film_${
-                      location.pathname === "/movies" ? "active" : ""
-                    }`}
-                  >
-                    Фильмы
-                  </button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/saved-movies"}>
-                  <button
-                    className={`navigation__saved-films navigation__saved-films_${
-                      location.pathname === "/saved-movies" ? "active" : ""
-                    }`}
-                  >
-                    Сохранённые фильмы
-                  </button>
-                </Link>
-              </li>
-            </ul>
-            <Link to={"/profile"} className="navigation__navigate">
-              <button className="navigation__account">Аккаунт</button>
-            </Link>
-          </div>
-          <div className="navigation__burger" onClick={handleClick}>
-            <BurgerMenu burger={isMenuOpen} />
+          <div className="navigation">
+            <div className="navigation__navigation-bar">
+              <ul className="navigation__list">
+                <li>
+                  <Link to={"/movies"}>
+                    <button
+                      className={`navigation__film navigation__film_${
+                        location.pathname === "/movies" ? "active" : ""
+                      }`}
+                    >
+                      Фильмы
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/saved-movies"}>
+                    <button
+                      className={`navigation__saved-films navigation__saved-films_${
+                        location.pathname === "/saved-movies" ? "active" : ""
+                      }`}
+                    >
+                      Сохранённые фильмы
+                    </button>
+                  </Link>
+                </li>
+              </ul>
+              <Link to={"/profile"} className="navigation__navigate">
+                <button className="navigation__account">Аккаунт</button>
+              </Link>
+            </div>
+            <div className="navigation__burger" onClick={handleClick}>
+              <BurgerMenu burger={isMenuOpen} />
+            </div>
           </div>
         </>
       )}
