@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies.js";
 import SavedMovies from "../Saved-movies/Saved-movies.js";
@@ -9,17 +9,13 @@ import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import * as MainApi from "../utils/MainApi";
+import mainApi from "../../utils/MainApi";
 
 function App() {
-  const navigate = useNavigate();
 
   function handleRegister({ email, password, name }) {
-    return MainApi
+    return mainApi
       .register(email, password, name)
-      .then(() => {
-        navigate("/signin");
-      })
       .catch((err) => {
         console.log(err);
       })

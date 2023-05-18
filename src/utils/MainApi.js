@@ -1,7 +1,5 @@
 import { BASE_URL } from './constants.js';
 
-console.log(BASE_URL);
-
 class Api {
   constructor(data) {
     this._baseUrl = data.baseUrl;
@@ -15,7 +13,7 @@ class Api {
     }
   }
 
-  registerUser(name, email, password) {
+  register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
