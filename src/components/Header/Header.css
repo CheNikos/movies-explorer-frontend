@@ -1,0 +1,45 @@
+.header {
+  height: 74px;
+  max-width: 1280px;
+  display: flex;
+}
+
+.header_theme_main {
+  background-color: #dddee3;
+}
+
+.header_theme_grey {
+  background-color: #fafafa;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  margin: 18px 0 18px 70px;
+  background-image: url("../../images/header-image/logo.svg");
+  border-radius: 20px;
+}
+
+.header__logo:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+      max-width: 768px;
+  }
+
+  .header__logo {
+    margin: 18px 0 18px 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+      max-width: 320px;
+  }
+
+  .header__logo {
+    margin: 18px 0 18px 14px;
+  }
+}

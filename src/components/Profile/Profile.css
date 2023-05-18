@@ -1,0 +1,146 @@
+.profile {
+  max-width: 1280px;
+  background-color: #ffffff;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.profile__container {
+  margin: 0 auto 0 auto;
+  max-width: 410px;
+  display: block;
+  padding-top: 74px;
+}
+
+.profile__title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.profile__form {
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 410px;
+  width: 100%;
+}
+
+.profile__input-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+.profile__input {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  border: none;
+  width: 122px;
+  text-align: end;
+}
+
+.profile__input-content:first-child {
+  margin-top: 123px;
+}
+
+.profile__line {
+  border-bottom: 1px solid #e8e8e8;
+  margin-top: 16px;
+  max-width: 410px;
+}
+
+.profile__edit {
+  margin-top: 220px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.profile__exit {
+  max-width: 410px;
+  width: 100%;
+  margin: 16px auto 0 auto;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  color: rgba(238, 52, 101, 1);
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    max-width: 768px;
+  }
+
+  .profile__container {
+    padding-top: 236px;
+  }
+
+  .profile__input-content:first-child {
+    margin-top: 96px;
+  }
+
+  .profile__edit {
+    margin-top: 210px;
+  }
+
+  .profile__exit {
+    padding-bottom: 269px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    max-width: 320px;
+  }
+
+  .profile__container {
+    max-width: 260px;
+    padding-top: 70px;
+  }
+
+  .profile__form {
+    width: 260px;
+  }
+
+  .profile__input {
+    width: 120px;
+  }
+
+  .profile__input-content:first-child {
+    margin-top: 80px;
+  }
+
+  .profile__line {
+    width: 260px;
+  }
+
+  .profile__edit {
+    margin-top: 379px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__exit {
+    margin: 16px auto 0 auto;
+    font-size: 12px;
+    line-height: 15px;
+    width: 260px;
+    padding-bottom: 40px;
+  }
+}

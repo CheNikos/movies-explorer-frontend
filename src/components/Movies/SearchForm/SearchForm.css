@@ -1,0 +1,148 @@
+.search-form {
+  display: block;
+  padding-top: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.search-form__search {
+  max-width: 1140px;
+  height: 34px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-form__input {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 34px;
+  max-width: 1060px;
+  padding: 0;
+  border: none;
+  background-color: #fafafa;
+}
+
+.search-form__input:focus {
+  outline: 0;
+  outline-offset: 0;
+  border: 1px solid #3456f3;
+  border-radius: 5px;
+}
+
+.search-form__find {
+  width: 80px;
+  height: 34px;
+  background-image: url(../../../images/movies-image/find.svg);
+  background-color: #fafafa;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: none;
+}
+
+.search-form__find:hover {
+  opacity: 80%;
+}
+
+.search-form__line {
+  max-width: 1140px;
+  border-bottom: 1px solid #e8e8e8;
+  margin: 13px auto 0 auto;
+}
+
+.search-form__checkbox {
+  width: 167px;
+  height: 25px;
+  margin: 32px auto 0 70px;
+  padding-bottom: 47px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-form__filter {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0 0 0 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    padding-top: 81px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .search-form__search {
+    max-width: 708px;
+  }
+
+  .search-form__input {
+    max-width: 200px;
+  }
+
+  .search-form__line {
+    max-width: 708px;
+    margin: 12px auto 0 auto;
+  }
+
+  .search-form__checkbox {
+    width: 167px;
+    margin: 30px 30px 0 auto;
+    padding-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
+  .search-form__filter {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0 16px 0 0;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .search-form {
+    padding-top: 90px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .search-form__search {
+    max-width: 292px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search-form__input {
+    font-size: 18px;
+    line-height: 22px;
+    width: 212px;
+  }
+
+  .search-form__input:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+
+  .search-form__line {
+    width: 292px;
+    margin: 15px auto 0 auto;
+  }
+
+  .search-form__checkbox {
+    width: 147px;
+    margin: 41px auto 0 auto;
+    padding-bottom: 51px;
+  }
+
+  .search-form__filter {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0 13px 0 0;
+  }
+}
