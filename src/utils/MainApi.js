@@ -1,95 +1,56 @@
-import { BASE_URL } from './constants.js';
+import { BASE_URL } from "./constants.js";
 
 class Api {
-  constructor(data) {
-    this._baseUrl = data.baseUrl;
-  }
+  _getResponse = (res) => {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  };
 
-  _checkResponse(response) {
-    if (response.ok) {
-      return response.json();
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-  }
+  register = (name, email, password) => {
+    return fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    }).then(this._getResponse);
+  };
 
-  register(name, email, password) {
-    return fetch(`${this._baseUrl}/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    }).then(res => this._requestResult(res));
-  }
-
-  login(email, password) {
-    return fetch(`${this._baseUrl}/signin`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+  login = (email, password) => {
+    return fetch(`${BASE_URL}/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ email, password }),
-    }).then(res => this._requestResult(res));
-  }
+    })
+      .then(this._getResponse)
+      .then((data) => {
+        localStorage.setItem("jwt", data.jwt);
+        return data;
+      });
+  };
+
+  checkToken = () => {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${BASE_URL}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._getResponse);
+  };
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    const token = localStorage.getItem('jwt');
+    return fetch(`${BASE_URL}/users/me`, {
+      headers: { 
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`  
       },
-    }).then(res => this._requestResult(res));
-  }
-
-  updateUser(name, email) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email }),
-    }).then(res => this._requestResult(res));
-  }
-
-  getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-      },
-    }).then(res => this._requestResult(res));
-  }
-
-  addNewMovie(data) {
-    return fetch(`${this._baseUrl}/movies`, {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        country: data.country,
-        director: data.director,
-        duration: data.duration,
-        year: data.year,
-        description: data.description,
-        image: data.image,
-        trailerLink: data.trailerLink,
-        thumbnail: data.thumbnail,
-        movieId: data.id,
-        nameRU: data.nameRU,
-        nameEN: data.nameEN,
-      }),
-    }).then(res => this._requestResult(res));
-  }
-
-  deleteMovie(data) {
-    return fetch(`${this._baseUrl}/movies/${data}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-      },
-    }).then(res => this._requestResult(res));
+    }).then((res) => {
+      return this._getResponse(res);
+    });
   }
 }
 

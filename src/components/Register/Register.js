@@ -38,14 +38,15 @@ export default function Register({ handleRegister }) {
             Имя
           </label>
           <input
-            onChange={handleChange}
             className="signup__input"
             type="text"
             minLength="2"
             maxLength="30"
             autoComplete="on"
             defaultValue="Николай"
+            name="name"
             required
+            onChange={handleChange}
           />
         </div>
         <div className="signup__input-content">
@@ -53,11 +54,12 @@ export default function Register({ handleRegister }) {
             E-mail
           </label>
           <input
-            onChange={handleChange}
             className="signup__input"
             type="email"
+            name="email"
             autoComplete="on"
             defaultValue="pochta@yandex.ru"
+            onChange={handleChange}
             required
           />
         </div>
@@ -65,7 +67,13 @@ export default function Register({ handleRegister }) {
           <label className="signup__label" htmlFor="password">
             Пароль
           </label>
-          <input className="signup__input" type="password" required />
+          <input
+            className="signup__input"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            required
+          />
         </div>
         <button className="signup__edit" type="submit">
           Зарегистрироваться
