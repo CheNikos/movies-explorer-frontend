@@ -1,17 +1,16 @@
 import "./MoviesCard.css";
-import image from "../../../images/card-image/praga-9.jpg";
 
 import { useLocation } from "react-router-dom";
 
-export default function MoviesCard() {
+export default function MoviesCard({card, nameRU, duration, image}) {
   const location = useLocation();
 
   return (
     <ul className="movies-card">
       <li className="movies-card__list">
-        <img src={image} alt="Прага" className="movies-card__image" />
+        <img src={`https://api.nomoreparties.co/${card.image.url}`} alt={nameRU} className="movies-card__image" />
         <div className="movies-card__description">
-          <p className="movies-card__name">33 слова о дизайне</p>
+          <p className="movies-card__name">{nameRU}</p>
           {location.pathname === "/movies" && (
             <button className="movies-card__like"></button>
           )}
@@ -20,7 +19,7 @@ export default function MoviesCard() {
           )}
         </div>
         <div className="movies-card__line"></div>
-        <p className="movies-card__time">1ч 42м</p>
+        <p className="movies-card__time">{duration} минут(ы)</p>
       </li>
     </ul>
   );

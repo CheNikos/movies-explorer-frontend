@@ -42,11 +42,11 @@ class Api {
   };
 
   getUserInfo() {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
     return fetch(`${BASE_URL}/users/me`, {
-      headers: { 
+      headers: {
         "content-type": "application/json",
-        Authorization: `Bearer ${token}`  
+        Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
       return this._getResponse(res);

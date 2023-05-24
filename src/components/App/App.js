@@ -12,12 +12,24 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  const [Cards, setCardsList] = useState([]);
+  useEffect(() => {
+    moviesApi.getMovies()
+    .then((res) => {
+      setCardsList(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   function handleRegister({ name, email, password }) {
     return mainApi
@@ -80,12 +92,12 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={<ProtectedRoute loggedIn={loggedIn} component={Movies} />}
+            element={<ProtectedRoute loggedIn={loggedIn} cards={Cards} component={Movies} />}
           />
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute loggedIn={loggedIn} component={SavedMovies} />
+              <ProtectedRoute loggedIn={loggedIn} cards={Cards} component={SavedMovies} />
             }
           />
           <Route
