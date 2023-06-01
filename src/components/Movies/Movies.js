@@ -7,9 +7,6 @@ export default function Movies({ cards }) {
     <main className="movies">
       <SearchForm />
       <MoviesCardList cards={cards}/>
-      <div className="movies__more">
-        <button className="movies__more-button">Ещё</button>
-      </div>
     </main>
   );
 }
