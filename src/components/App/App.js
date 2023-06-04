@@ -22,13 +22,14 @@ function App() {
 
   const [Cards, setCardsList] = useState([]);
   useEffect(() => {
-    moviesApi.getMovies()
-    .then((res) => {
-      setCardsList(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        setCardsList(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   function handleRegister({ name, email, password }) {
@@ -68,21 +69,19 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-    Promise.all([mainApi.getUserInfo()])
-      .then(([userData]) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });}
+      Promise.all([mainApi.getUserInfo()])
+        .then(([userData]) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
   }, [setCurrentUser, loggedIn]);
 
-  // function handleSingOut() {
-  //   localStorage.removeItem("jwt");
-  //   setHeaderEmail("");
-  //   setLoggedIn(false);
-  //   navigate("/signin");
-  // }
+  function handleSingOut() {
+    localStorage.removeItem("jwt");
+  }
 
   return (
     <div className="app">
@@ -92,17 +91,33 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={<ProtectedRoute loggedIn={loggedIn} cards={Cards} component={Movies} />}
+            element={
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                cards={Cards}
+                component={Movies}
+              />
+            }
           />
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute loggedIn={loggedIn} cards={Cards} component={SavedMovies} />
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                cards={Cards}
+                component={SavedMovies}
+              />
             }
           />
           <Route
             path="/profile"
-            element={<ProtectedRoute loggedIn={loggedIn} component={Profile} />}
+            element={
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                handleSingOut={handleSingOut}
+                component={Profile}
+              />
+            }
           />
           <Route
             path="/signup"
