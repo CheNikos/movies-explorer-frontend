@@ -83,6 +83,17 @@ function App() {
     localStorage.removeItem("jwt");
   }
 
+  function handleUpdateProfile (name, email) {
+    return mainApi
+      .updateUserInfo(name, email)
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
@@ -116,6 +127,7 @@ function App() {
                 loggedIn={loggedIn}
                 handleSingOut={handleSingOut}
                 component={Profile}
+                onSubmit={handleUpdateProfile}
               />
             }
           />
