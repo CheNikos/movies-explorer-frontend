@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { useContext, useState, useCallback, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useFormValidation } from '../../hooks/useForm';
+import useFormValidation from "../../hooks/useForm";
+import {PATTERN_EMAIL, PATTERN_USERNAME} from '../../utils/constants';
 import "./Profile.css";
 
 export default function Profile({ handleSingOut, onSubmit }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const { values, setValues, handleInputChange, isValid } =
-    useFormValidation();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { values, setValues, handleInputChange, isValid } = useFormValidation();
 
   const checkStatusSubmit = useCallback(() => {
     return (
@@ -23,12 +23,12 @@ export default function Profile({ handleSingOut, onSubmit }) {
   }, [setValues, currentUser]);
 
   useEffect(() => {
-    setIsSubmitDisabled(checkStatusSubmit());
+    setIsButtonDisabled(checkStatusSubmit());
   }, [checkStatusSubmit]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    setIsSubmitDisabled(true);
+    setIsButtonDisabled(true);
     onSubmit(values);
     checkStatusSubmit();
   }
@@ -37,26 +37,20 @@ export default function Profile({ handleSingOut, onSubmit }) {
     <section className="profile">
       <div className="profile__container">
         <h1 className="profile__title">Привет, {`${currentUser.name}`}!</h1>
-        <form
-          className="profile__form"
-          isSubmitDisabled={isSubmitDisabled}
-          onSubmit={handleSubmit}
-        >
-          >
+        <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__input-content">
             <label className="profile__label" htmlFor="name">
               Имя
             </label>
             <input
-              onChange={handleInputChange}
+              value={values.name || ""}
               className="profile__input"
+              name="name"
+              id="name"
               type="text"
-              minLength="2"
-              maxLength="30"
-              autoComplete="on"
-              value={`${currentUser.name}`}
+              pattern={PATTERN_USERNAME}
               required
-              disabled
+              onChange={handleInputChange}
             />
           </div>
           <div className="profile__line"></div>
@@ -65,16 +59,21 @@ export default function Profile({ handleSingOut, onSubmit }) {
               E-mail
             </label>
             <input
-              onChange={handleInputChange}
+              value={values.email || ""}
               className="profile__input"
+              name="email"
+              id="email"
               type="email"
-              autoComplete="on"
-              value={`${currentUser.email}`}
+              pattern={PATTERN_EMAIL}
               required
-              disabled
+              onChange={handleInputChange}
             />
           </div>
-          <button className="profile__edit" type="submit">
+          <button
+            className="profile__edit"
+            type="submit"
+            isButtonDisabled={isButtonDisabled}
+          >
             Редактировать
           </button>
         </form>

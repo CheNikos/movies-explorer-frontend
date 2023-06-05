@@ -83,11 +83,11 @@ function App() {
     localStorage.removeItem("jwt");
   }
 
-  function handleUpdateProfile (name, email) {
-    return mainApi
+  function handleUpdateProfile({ name, email }) {
+    mainApi
       .updateUserInfo(name, email)
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then(newUserData => {
+        setCurrentUser(newUserData);
       })
       .catch((err) => {
         console.log(err);

@@ -53,18 +53,17 @@ class Api {
     });
   }
 
-  updateUserInfo = (name, email) => {
+  updateUserInfo(name, email) {
     const token = localStorage.getItem("jwt");
     return fetch(`${BASE_URL}/users/me`, {
       method: "PATCH",
       headers: {
-        Accept: "application/json",
+        authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ email, name }),
-    }).then(this._getResponse);
-  };
+      body: JSON.stringify({ name, email }),
+    }).then((res) => this._getResponse(res));
+  }
 }
 
 const mainApi = new Api({
