@@ -64,6 +64,41 @@ class Api {
       body: JSON.stringify({ name, email }),
     }).then((res) => this._getResponse(res));
   }
+
+  saveMovie(data) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${BASE_URL}/movies`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        movieId: data.id,
+        image: 'https://api.nomoreparties.co' + data.image.url,
+        trailerLink: data.trailerLink,
+        thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+      }),
+    }).then((res) => this._getResponse(res));
+  }
+
+  deleteMovie(movieId) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${BASE_URL}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => this._getResponse(res));
+  }
 }
 
 const mainApi = new Api({

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState, useCallback, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormValidation from "../../hooks/useForm";
-import {PATTERN_EMAIL, PATTERN_USERNAME} from '../../utils/constants';
+import { PATTERN_EMAIL, PATTERN_USERNAME } from "../../utils/constants";
 import "./Profile.css";
 
 export default function Profile({ handleSingOut, onSubmit }) {
@@ -72,7 +72,7 @@ export default function Profile({ handleSingOut, onSubmit }) {
           <button
             className="profile__edit"
             type="submit"
-            isButtonDisabled={isButtonDisabled}
+            disabled={isButtonDisabled}
           >
             Редактировать
           </button>

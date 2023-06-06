@@ -2,7 +2,7 @@ import "./MoviesCardList.css";
 import React, { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({ cards }) {
+export default function MoviesCardList({ cards, savedMovies, isSavedMovies, onSaveMovie, onDeleteMovie }) {
   const [shownMovies, setShownMovies] = useState(0);
 
   function shownMoviesList() {
@@ -46,9 +46,10 @@ export default function MoviesCardList({ cards }) {
           <MoviesCard
             card={cardsItem}
             key={cardsItem.id}
-            nameRU={cardsItem.nameRU}
-            duration={cardsItem.duration}
-            image={cardsItem.image.url}
+            isSavedMovies={isSavedMovies}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            savedMovies={savedMovies}
           />
         ))}
       </div>

@@ -18,6 +18,8 @@ import ProtectedRoute from "../ProtectedRoute";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [listFoundSavedMovies, setListFoundSavedMovies] = useState([]);
   const navigate = useNavigate();
 
   const [Cards, setCardsList] = useState([]);
@@ -94,6 +96,28 @@ function App() {
       });
   }
 
+  const handleSaveMovie = (card) => {
+    mainApi.saveMovie(card)
+      .then((data) => {
+        setSavedMovies([...savedMovies, data]);
+        setListFoundSavedMovies([...savedMovies, data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteMovie = (saveId, movieId) => {
+    mainApi.deleteMovie(saveId)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(movie => movie.movieId !== movieId));
+        setListFoundSavedMovies(listFoundSavedMovies.filter(movie => movie.movieId !== movieId));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
@@ -107,6 +131,9 @@ function App() {
                 loggedIn={loggedIn}
                 cards={Cards}
                 component={Movies}
+                onSaveMovie={handleSaveMovie}
+                onDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
               />
             }
           />
