@@ -19,7 +19,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [listFoundSavedMovies, setListFoundSavedMovies] = useState([]);
   const navigate = useNavigate();
 
   const [Cards, setCardsList] = useState([]);
@@ -71,15 +70,16 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([mainApi.getUserInfo()])
-        .then(([userData]) => {
+      Promise.all([mainApi.getUserInfo(), mainApi.getCards()])
+        .then(([userData, cardsData]) => {
           setCurrentUser(userData);
+          setSavedMovies(cardsData.reverse());
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
     }
-  }, [setCurrentUser, loggedIn]);
+  }, [setCurrentUser, setSavedMovies, loggedIn]);
 
   function handleSingOut() {
     localStorage.removeItem("jwt");
@@ -88,7 +88,7 @@ function App() {
   function handleUpdateProfile({ name, email }) {
     mainApi
       .updateUserInfo(name, email)
-      .then(newUserData => {
+      .then((newUserData) => {
         setCurrentUser(newUserData);
       })
       .catch((err) => {
@@ -96,27 +96,29 @@ function App() {
       });
   }
 
-  const handleSaveMovie = (card) => {
-    mainApi.saveMovie(card)
+  function handleSaveMovie(card) {
+    mainApi
+      .saveMovie(card)
       .then((data) => {
-        setSavedMovies([...savedMovies, data]);
-        setListFoundSavedMovies([...savedMovies, data]);
+        setSavedMovies([data, ...savedMovies]);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
-  const handleDeleteMovie = (saveId, movieId) => {
-    mainApi.deleteMovie(saveId)
+  function handleDeleteMovie(card) {
+    mainApi
+      .deleteMovie(card._id)
       .then(() => {
-        setSavedMovies(savedMovies.filter(movie => movie.movieId !== movieId));
-        setListFoundSavedMovies(listFoundSavedMovies.filter(movie => movie.movieId !== movieId));
+        setSavedMovies((state) =>
+          state.filter((item) => item._id !== card._id)
+        );
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
   return (
     <div className="app">
@@ -144,6 +146,8 @@ function App() {
                 loggedIn={loggedIn}
                 cards={Cards}
                 component={SavedMovies}
+                savedMovies={savedMovies}
+                onDeleteMovie={handleDeleteMovie}
               />
             }
           />

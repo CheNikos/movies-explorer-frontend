@@ -65,6 +65,17 @@ class Api {
     }).then((res) => this._getResponse(res));
   }
 
+  getCards() {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${BASE_URL}/movies`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => this._getResponse(res));
+  };
+
   saveMovie(data) {
     const token = localStorage.getItem("jwt");
     return fetch(`${BASE_URL}/movies`, {

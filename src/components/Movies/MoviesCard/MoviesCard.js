@@ -1,37 +1,24 @@
 import "./MoviesCard.css";
 
-import { useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-
 export default function MoviesCard({
   card,
   isSavedMovies,
   onSaveMovie,
   onDeleteMovie,
   savedMovies,
+  saved,
 }) {
-  const location = useLocation();
-
-  const [isSaved, setIsSaved] = useState(false);
-  const [savedMovie, setSavedMovie] = useState();
-
-  useEffect(() => {
-    setSavedMovie(savedMovies.find(m => m.id === card.id));
-    if (!!savedMovie) {
-      setIsSaved(true);
+  function handleSaveMovie() {
+    if (saved) {
+      onDeleteMovie(savedMovies.filter((m) => m.movieId === card.id)[0]);
     } else {
-      setIsSaved(false);
+      onSaveMovie(card);
     }
-  }, [card, savedMovie, savedMovies]);
+  }
 
-  const handleSaveMovie = () => {
-    onSaveMovie(card);
-    console.log(card.id);
-  };
-
-  const handleDeleteMovie = () => {
-    onDeleteMovie(savedMovie.saveId, savedMovie.id);
-  };
+  function handleDeleteMovie() {
+    onDeleteMovie(card);
+  }
 
   return (
     <ul className="movies-card">
@@ -43,20 +30,21 @@ export default function MoviesCard({
         />
         <div className="movies-card__description">
           <p className="movies-card__name">{card.nameRU}</p>
-          {location.pathname === "/movies" && (
+          {isSavedMovies ? (
             <button
-              className={`movies-card__like ${
-                !isSavedMovies
-                  ? !isSaved
-                    : "movies-card__like_active"
-              }`}
-              onClick={!isSaved ? handleSaveMovie : handleDeleteMovie}
-            ></button>
-          )}
-          {location.pathname === "/saved-movies" && (
-            <button
+              type="button"
               className="movies-card__like-delete"
-              onClick={!isSaved ? handleSaveMovie : handleDeleteMovie}
+              onClick={handleDeleteMovie}
+            ></button>
+          ) : (
+            <button
+              type="button"
+              className={`${
+                saved
+                  ? "movies-card__like movies-card__like_active"
+                  : "movies-card__like"
+              }`}
+              onClick={handleSaveMovie}
             ></button>
           )}
         </div>
