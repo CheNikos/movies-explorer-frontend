@@ -20,8 +20,9 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const navigate = useNavigate();
-
   const [Cards, setCardsList] = useState([]);
+  const [listFoundSavedMovies, setListFoundSavedMovies] = useState([]);
+
   useEffect(() => {
     moviesApi
       .getMovies()
@@ -32,6 +33,20 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getCards()])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData);
+          setSavedMovies(cardsData.reverse());
+          setListFoundSavedMovies(cardsData);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
+  }, [setCurrentUser, setSavedMovies, loggedIn]);
 
   function handleRegister({ name, email, password }) {
     return mainApi
@@ -68,21 +83,9 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), mainApi.getCards()])
-        .then(([userData, cardsData]) => {
-          setCurrentUser(userData);
-          setSavedMovies(cardsData.reverse());
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }, [setCurrentUser, setSavedMovies, loggedIn]);
-
   function handleSingOut() {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("data")
   }
 
   function handleUpdateProfile({ name, email }) {
@@ -101,6 +104,7 @@ function App() {
       .saveMovie(card)
       .then((data) => {
         setSavedMovies([data, ...savedMovies]);
+        setListFoundSavedMovies([data, ...savedMovies]);
       })
       .catch((err) => {
         console.log(err);
@@ -110,10 +114,11 @@ function App() {
   function handleDeleteMovie(card) {
     mainApi
       .deleteMovie(card._id)
-      .then(() => {
-        setSavedMovies((state) =>
-          state.filter((item) => item._id !== card._id)
+      .then((card) => {
+        setListFoundSavedMovies(
+          listFoundSavedMovies.filter((item) => item._id !== card._id)
         );
+        setSavedMovies(savedMovies.filter((item) => item._id !== card._id));
       })
       .catch((err) => {
         console.log(err);
@@ -123,7 +128,7 @@ function App() {
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header loggedIn={loggedIn}/>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -144,7 +149,7 @@ function App() {
             element={
               <ProtectedRoute
                 loggedIn={loggedIn}
-                cards={Cards}
+                cards={listFoundSavedMovies}
                 component={SavedMovies}
                 savedMovies={savedMovies}
                 onDeleteMovie={handleDeleteMovie}

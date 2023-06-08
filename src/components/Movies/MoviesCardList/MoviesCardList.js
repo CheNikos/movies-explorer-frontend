@@ -60,7 +60,7 @@ export default function MoviesCardList({
               <MoviesCard
                 card={card}
                 cards={cards}
-                key={card.id}
+                key={card.movieId}
                 isSavedMovies={isSavedMovies}
                 saved={getSavedMovieCard(savedMovies, card)}
                 onSaveMovie={onSaveMovie}

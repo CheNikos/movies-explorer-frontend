@@ -2,7 +2,7 @@ import "./Header.css";
 import { useLocation, Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-export default function Header() {
+export default function Header({ loggedIn }) {
   const location = useLocation();
 
   return (
@@ -18,7 +18,18 @@ export default function Header() {
           }`}
         >
           <Link to={"/"} className="header__logo"></Link>
-          <Navigation />
+          {loggedIn ? (
+            <Navigation />
+          ) : (
+            <div className="header__navigation">
+              <Link to={"/signup"} className="header__registration">
+                Регистрация
+              </Link>
+              <Link to={"/signin"} className="header__signin">
+                <p className="header__signin-text">Войти</p>
+              </Link>
+            </div>
+          )}
         </header>
       )}
     </>

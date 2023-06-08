@@ -1,4 +1,5 @@
 import "./MoviesCard.css";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesCard({
   card,
@@ -8,6 +9,9 @@ export default function MoviesCard({
   savedMovies,
   saved,
 }) {
+  const location = useLocation();
+  const cardLike = `movies-card__like ${saved ? "movies-card__like_active" : ""}`;
+
   function handleSaveMovie() {
     if (saved) {
       onDeleteMovie(savedMovies.filter((m) => m.movieId === card.id)[0]);
@@ -23,27 +27,31 @@ export default function MoviesCard({
   return (
     <ul className="movies-card">
       <li className="movies-card__list">
-        <img
-          src={`https://api.nomoreparties.co/${card.image.url}`}
-          alt={card.nameRU}
-          className="movies-card__image"
-        />
+        {location.pathname === "/movies" ? (
+          <img
+            src={`https://api.nomoreparties.co/${card.image.url}`}
+            alt={card.nameRU}
+            className="movies-card__image"
+          />
+        ) : (
+          <img
+            src={card.image}
+            alt={card.nameRU}
+            className="movies-card__image"
+          />
+        )}
         <div className="movies-card__description">
           <p className="movies-card__name">{card.nameRU}</p>
-          {isSavedMovies ? (
+          {isSavedMovies? (
             <button
               type="button"
-              className="movies-card__like-delete"
+              className={"movies-card__like-delete"}
               onClick={handleDeleteMovie}
             ></button>
           ) : (
             <button
               type="button"
-              className={`${
-                saved
-                  ? "movies-card__like movies-card__like_active"
-                  : "movies-card__like"
-              }`}
+              className={cardLike}
               onClick={handleSaveMovie}
             ></button>
           )}

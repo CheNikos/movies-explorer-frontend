@@ -77,7 +77,7 @@ export default function Profile({ handleSingOut, onSubmit }) {
             Редактировать
           </button>
         </form>
-        <Link to={"/"}>
+        <Link to={"/signup"}>
           <button
             className="profile__exit"
             type="button"

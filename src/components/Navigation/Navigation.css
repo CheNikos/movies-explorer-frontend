@@ -6,46 +6,6 @@
   text-decoration: none;
 }
 
-.navigation__registration {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0px;
-  display: block;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-right: 30px;
-  text-decoration: none;
-  color: rgba(0, 0, 0, 1);
-}
-
-.navigation__signin {
-  left: 88.59%;
-  right: 5.47%;
-  top: 3.31%;
-  bottom: 91.64%;
-  background: #3456f3;
-  border-radius: 3px;
-  width: 76px;
-  height: 32px;
-  text-decoration: none;
-}
-
-.navigation__signin:hover {
-  opacity: 80%;
-}
-
-.navigation__signin-text {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0px;
-  margin-bottom: 8px;
-  margin-top: 8px;
-  text-align: center;
-  color: rgba(255, 255, 255, 1);
-}
-
 .navigation__navigation-bar {
   display: flex;
   margin: auto;
@@ -93,6 +53,10 @@
   font-weight: 500;
 }
 
+.navigation__film_main {
+  background-color: #dddee3
+}
+
 .navigation__saved-films {
   font-size: 13px;
   font-weight: 400;
@@ -106,6 +70,10 @@
 
 .navigation__saved-films_active {
   font-weight: 500;
+}
+
+.navigation__saved-films_main {
+  background-color: #dddee3
 }
 
 .navigation__burger {
@@ -131,28 +99,11 @@
     width: 44px;
     height: 44px;
   }
-
-  .navigation {
-    margin-right: 30px;
-  }
 }
 
 @media screen and (max-width: 320px) {
   .navigation__burger {
     width: 40px;
     height: 43px;
-  }
-
-  .navigation {
-    margin-right: 14px;
-  }
-
-  .navigation__registration {
-    margin-right: 14px;
-    font-size: 10px;
-  }
-
-  .navigation__signin-text {
-    font-size: 10px;
   }
 }

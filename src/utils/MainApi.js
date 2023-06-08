@@ -100,9 +100,9 @@ class Api {
     }).then((res) => this._getResponse(res));
   }
 
-  deleteMovie(movieId) {
+  deleteMovie(cardId) {
     const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/movies/${movieId}`, {
+    return fetch(`${BASE_URL}/movies/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${token}`,
