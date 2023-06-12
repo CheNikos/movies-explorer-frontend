@@ -24,20 +24,10 @@ function App() {
   const [listFoundSavedMovies, setListFoundSavedMovies] = useState([]);
 
   useEffect(() => {
-    moviesApi
-      .getMovies()
-      .then((res) => {
-        setCardsList(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
     if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), mainApi.getCards()])
-        .then(([userData, cardsData]) => {
+      Promise.all([mainApi.getUserInfo(), mainApi.getCards(), moviesApi.getMovies()])
+        .then(([userData, cardsData, allMovies]) => {
+          setCardsList(allMovies);
           setCurrentUser(userData);
           setSavedMovies(cardsData.reverse());
           setListFoundSavedMovies(cardsData);
@@ -46,7 +36,18 @@ function App() {
           console.log(`Ошибка: ${err}`);
         });
     }
-  }, [setCurrentUser, setSavedMovies, loggedIn]);
+  }, [setCardsList, setCurrentUser, setSavedMovies, loggedIn]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      mainApi.checkToken(token).then(() => {
+        setLoggedIn(true);
+        navigate();
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   function handleRegister({ name, email, password }) {
     return mainApi
@@ -71,17 +72,6 @@ function App() {
         console.log(err);
       });
   }
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      mainApi.checkToken(token).then(() => {
-        setLoggedIn(true);
-        navigate();
-      });
-    }
-    // eslint-disable-next-line
-  }, []);
 
   function handleSingOut() {
     localStorage.removeItem("jwt");

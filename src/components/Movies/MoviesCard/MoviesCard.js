@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 
@@ -9,16 +10,29 @@ export default function MoviesCard({
   savedMovies,
   saved,
 }) {
+  const [isLike, setIsLike] = useState(false);
   const location = useLocation();
-  const cardLike = `movies-card__like ${saved ? "movies-card__like_active" : ""}`;
+  const cardLike = `movies-card__like ${
+    isLike ? "movies-card__like_active" : " "
+  }`;
 
   function handleSaveMovie() {
-    if (saved) {
+    if (isLike) {
       onDeleteMovie(savedMovies.filter((m) => m.movieId === card.id)[0]);
+      setIsLike(false);
     } else {
       onSaveMovie(card);
     }
   }
+
+  useEffect(() => {
+    if (saved) {
+      setIsLike(true);
+    }
+  }, [saved]);
+  const durationMovie = `${Math.trunc(card.duration / 60)}ч ${
+    card.duration % 60
+  }м`;
 
   function handleDeleteMovie() {
     onDeleteMovie(card);
@@ -42,7 +56,7 @@ export default function MoviesCard({
         )}
         <div className="movies-card__description">
           <p className="movies-card__name">{card.nameRU}</p>
-          {isSavedMovies? (
+          {isSavedMovies ? (
             <button
               type="button"
               className={"movies-card__like-delete"}
@@ -57,7 +71,7 @@ export default function MoviesCard({
           )}
         </div>
         <div className="movies-card__line"></div>
-        <p className="movies-card__time">{card.duration} минут(ы)</p>
+        <p className="movies-card__time">{durationMovie} минут(ы)</p>
       </li>
     </ul>
   );
