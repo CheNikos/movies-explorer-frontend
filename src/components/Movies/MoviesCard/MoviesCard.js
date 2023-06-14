@@ -25,18 +25,21 @@ export default function MoviesCard({
     }
   }
 
-  useEffect(() => {
-    if (saved) {
-      setIsLike(true);
-    }
-  }, [saved]);
-  const durationMovie = `${Math.trunc(card.duration / 60)}ч ${
-    card.duration % 60
-  }м`;
-
   function handleDeleteMovie() {
     onDeleteMovie(card);
   }
+
+  useEffect(() => {
+    if (saved) {
+      setIsLike(true);
+    } else {
+      setIsLike(false)
+    }
+  }, [saved]);
+
+  const durationMovie = `${Math.trunc(card.duration / 60)}ч ${
+    card.duration % 60
+  }м`;
 
   return (
     <ul className="movies-card">
@@ -59,7 +62,7 @@ export default function MoviesCard({
           {isSavedMovies ? (
             <button
               type="button"
-              className={"movies-card__like-delete"}
+              className="movies-card__like-delete"
               onClick={handleDeleteMovie}
             ></button>
           ) : (

@@ -12,7 +12,6 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import mainApi from "../../utils/MainApi";
-import moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
 
 function App() {
@@ -20,23 +19,32 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const navigate = useNavigate();
-  const [Cards, setCardsList] = useState([]);
-  const [listFoundSavedMovies, setListFoundSavedMovies] = useState([]);
+
+  useEffect(() => {
+    mainApi.getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData);
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        if (err.status !== 401) {
+          console.log(err);;
+        }
+      })
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), mainApi.getCards(), moviesApi.getMovies()])
-        .then(([userData, cardsData, allMovies]) => {
-          setCardsList(allMovies);
-          setCurrentUser(userData);
-          setSavedMovies(cardsData.reverse());
-          setListFoundSavedMovies(cardsData);
+      mainApi.getCards()
+        .then((data) => {
+          setSavedMovies(data);
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          console.log(err);
         });
     }
-  }, [setCardsList, setCurrentUser, setSavedMovies, loggedIn]);
+  }, [loggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -75,7 +83,7 @@ function App() {
 
   function handleSingOut() {
     localStorage.removeItem("jwt");
-    localStorage.removeItem("data")
+    localStorage.removeItem("data");
   }
 
   function handleUpdateProfile({ name, email }) {
@@ -94,7 +102,6 @@ function App() {
       .saveMovie(card)
       .then((data) => {
         setSavedMovies([data, ...savedMovies]);
-        setListFoundSavedMovies([data, ...savedMovies]);
       })
       .catch((err) => {
         console.log(err);
@@ -105,9 +112,6 @@ function App() {
     mainApi
       .deleteMovie(card._id)
       .then((card) => {
-        setListFoundSavedMovies(
-          listFoundSavedMovies.filter((item) => item._id !== card._id)
-        );
         setSavedMovies(savedMovies.filter((item) => item._id !== card._id));
       })
       .catch((err) => {
@@ -118,7 +122,7 @@ function App() {
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn}/>
+        <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -126,7 +130,6 @@ function App() {
             element={
               <ProtectedRoute
                 loggedIn={loggedIn}
-                cards={Cards}
                 component={Movies}
                 onSaveMovie={handleSaveMovie}
                 onDeleteMovie={handleDeleteMovie}
@@ -139,8 +142,9 @@ function App() {
             element={
               <ProtectedRoute
                 loggedIn={loggedIn}
-                cards={listFoundSavedMovies}
+                cards={savedMovies}
                 component={SavedMovies}
+                onSaveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
                 onDeleteMovie={handleDeleteMovie}
               />

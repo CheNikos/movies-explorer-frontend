@@ -69,8 +69,7 @@ export default function MoviesCardList({
               />
             ))}
           </div>
-          <div className="movies-cards__more">
-          </div>
+          <div className="movies-cards__more"></div>
         </>
       ) : (
         <>
