@@ -1,114 +1,62 @@
 import { BASE_URL } from "./constants.js";
-
+import axios from 'axios';
+export const instance = axios.create({
+  baseURL: BASE_URL, // Базовый URL для всех запросов
+  timeout: 5000, // Таймаут запроса (в миллисекундах)
+  headers: {
+     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    'Content-Type': 'application/json',
+  }
+});
 class Api {
   _getResponse = (res) => {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    return res.ok ? res.json() : res
   };
 
   register = (name, email, password) => {
-    return fetch(`${BASE_URL}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    }).then(this._getResponse);
+    return instance.post(`/signup`, JSON.stringify({ name, email, password }))
   };
 
   login = (email, password) => {
-    return fetch(`${BASE_URL}/signin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(this._getResponse)
-      .then((data) => {
-        localStorage.setItem("jwt", data.jwt);
-        return data;
-      });
+    return instance.post(`/signin`, JSON.stringify({ email, password }))
   };
 
   checkToken = () => {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/users/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }).then(this._getResponse);
+    return instance.get(`/users/me`)
   };
 
   getUserInfo() {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/users/me`, {
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => {
-      return this._getResponse(res);
-    });
+    return instance.get('/users/me')
   }
 
   updateUserInfo(name, email) {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/users/me`, {
-      method: "PATCH",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email }),
-    }).then((res) => this._getResponse(res));
+
+    return instance.patch('/users/me', JSON.stringify({ name, email }))
   }
 
   getCards() {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/movies`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => this._getResponse(res));
+    return instance.get(`/movies`)
   };
 
   saveMovie(data) {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/movies`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: data.country,
-        director: data.director,
-        duration: data.duration,
-        year: data.year,
-        description: data.description,
-        movieId: data.id,
-        image: 'https://api.nomoreparties.co' + data.image.url,
-        trailerLink: data.trailerLink,
-        thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
-        nameRU: data.nameRU,
-        nameEN: data.nameEN,
-      }),
-    }).then((res) => this._getResponse(res));
+
+    return instance.post(`/movies`, JSON.stringify({
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      movieId: data.id,
+      image: 'https://api.nomoreparties.co' + data.image.url,
+      trailerLink: data.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+    }))
   }
 
   deleteMovie(cardId) {
-    const token = localStorage.getItem("jwt");
-    return fetch(`${BASE_URL}/movies/${cardId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => this._getResponse(res));
+    return instance.delete(`/movies/${cardId}`)
   }
 }
 

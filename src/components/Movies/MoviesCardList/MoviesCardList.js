@@ -12,7 +12,6 @@ export default function MoviesCardList({
 }) {
   const [shownMovies, setShownMovies] = useState(0);
   const location = useLocation();
-
   function shownMoviesList() {
     const display = window.innerWidth;
     if (display > 1279) {
@@ -48,15 +47,16 @@ export default function MoviesCardList({
   }
 
   function getSavedMovieCard(savedMovies, card) {
-    return savedMovies.find((savedMovie) => savedMovie.movieId === card.id);
+    return savedMovies?.find((savedMovie) => savedMovie.movieId === card.id);
   }
+
 
   return (
     <>
       {location.pathname === "/saved-movies" ? (
         <>
           <div className="movies-cards">
-            {cards.map((card) => (
+            {cards && cards?.map((card) => (
               <MoviesCard
                 card={card}
                 cards={cards}
@@ -67,14 +67,17 @@ export default function MoviesCardList({
                 onDeleteMovie={onDeleteMovie}
                 savedMovies={savedMovies}
               />
-            ))}
+            ))
+
+            }
+            {!cards && <div>Не найденно</div>}
           </div>
           <div className="movies-cards__more"></div>
         </>
       ) : (
         <>
           <div className="movies-cards">
-            {cards.slice(0, shownMovies).map((card) => (
+            {cards?.length ? cards?.slice(0, shownMovies)?.map((card) => (
               <MoviesCard
                 card={card}
                 cards={cards}
@@ -85,10 +88,12 @@ export default function MoviesCardList({
                 onDeleteMovie={onDeleteMovie}
                 savedMovies={savedMovies}
               />
-            ))}
+            )):
+                <div>Не найденно</div>
+            }
           </div>
           <div className="movies-cards__more">
-            {cards.length > shownMovies ? (
+            {cards?.length > shownMovies ? (
               <button className="movies-cards__more-button" onClick={showMore}>
                 Ещё
               </button>

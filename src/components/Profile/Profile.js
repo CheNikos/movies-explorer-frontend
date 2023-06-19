@@ -36,7 +36,7 @@ export default function Profile({ handleSingOut, onSubmit }) {
   return (
     <section className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">Привет, {`${currentUser.name}`}!</h1>
+        <h1 className="profile__title">Привет, {`${currentUser?.name}`}!</h1>
         <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__input-content">
             <label className="profile__label" htmlFor="name">

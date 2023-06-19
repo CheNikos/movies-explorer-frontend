@@ -1,15 +1,13 @@
 import { MOVIES_URL } from "./constants.js";
+import {instance} from "./MainApi";
 
 class MoviesApi {
   _getResponse = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   };
 
-  getMovies() {
-    return fetch(`${MOVIES_URL}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => this._getResponse(res));
+  getMovies(token) {
+    return instance.get(`${MOVIES_URL}` )
   }
 }
 
