@@ -3,19 +3,9 @@ import "../Movies/Movies.css";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import {useEffect, useState} from "react";
+import {searchMovies, sortedCardsShortFilms} from "../../utils/utils";
 
-export const sortedCardsShortFilms = (cards) => {
-    return cards.filter(card => card.duration <= 40)
-}
-export const searchMovies = (searchText, cards) => {
-    const searchEn = cards.filter(movie => movie.nameEN.toLowerCase().includes(searchText.toLowerCase()) )
-    const searchRu = cards.filter(movie => movie.nameRU.toLowerCase().includes(searchText.toLowerCase()) )
-    const joinArrays = searchRu.concat(searchEn)
-    const uniqueArray = [...new Set(joinArrays.map(obj => obj._id))].map(id => {
-        return joinArrays.find(obj => obj._id === id);
-    });
-    return uniqueArray
-}
+
 export default function SavedMovies({ savedMovies, onDeleteMovie}) {
     const [search, setSearch] = useState('')
     const [checkBox, setCheckBox] = useState(false)
@@ -27,7 +17,6 @@ export default function SavedMovies({ savedMovies, onDeleteMovie}) {
         } else {
             setCurrentCards(savedMovies)
         }
-        // eslint-disable-next-line
     }, [savedMovies])
 
     const onSendEligibleFilm = () => {

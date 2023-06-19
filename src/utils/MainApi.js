@@ -1,8 +1,8 @@
-import { BASE_URL } from "./constants.js";
+import {BASE_URL, MOVIES_URL} from "./constants.js";
 import axios from 'axios';
 export const instance = axios.create({
   baseURL: BASE_URL, // Базовый URL для всех запросов
-  timeout: 5000, // Таймаут запроса (в миллисекундах)
+  /*timeout: 5000, // Таймаут запроса (в миллисекундах)*/
   headers: {
      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     'Content-Type': 'application/json',
@@ -25,21 +25,25 @@ class Api {
     return instance.get(`/users/me`)
   };
 
-  getUserInfo() {
+  getUserInfo(token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return instance.get('/users/me')
   }
 
   updateUserInfo(name, email) {
-
     return instance.patch('/users/me', JSON.stringify({ name, email }))
   }
 
-  getCards() {
-    return instance.get(`/movies`)
+  getCards(jwt) {
+    return fetch(`/movies`, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    }).then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    })
   };
 
   saveMovie(data) {
-
     return instance.post(`/movies`, JSON.stringify({
       country: data.country,
       director: data.director,

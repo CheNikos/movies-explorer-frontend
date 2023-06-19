@@ -2,6 +2,7 @@ import "./Register.css";
 import logo from "../../images/header-image/logo.svg";
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import {validateEmail} from "../Login/Login";
 import {isEmailValid} from "../../utils/constants";
 
 export default function Register({handleRegister}) {

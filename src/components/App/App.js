@@ -23,27 +23,23 @@ function App() {
     const [savedMovies, setSavedMovies] = useState([]);
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [init, setInit] = useState(true);
     const [error, setError] = useState();
     const navigate = useNavigate();
 
-
-    useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        if (loggedIn && token) {
-            setLoading(true)
-            mainApi.getCards()
-                .then((data) => {
-                    setSavedMovies(data.data);
-                })
-                .catch((err) => {
-                    setError(err?.response?.data?.message)
-                }).finally(() => {
-                setLoading(false)
-            });
-        }
-    }, [loggedIn]);
-
-
+useEffect(() => {
+    const token = localStorage.getItem('token')
+    if((token && loggedIn) && !init) {
+        mainApi.getUserInfo(token)
+            .then((data) => {
+                getMovies(token)
+                getCards(token)
+                setCurrentUser(data.data);
+            }).catch((err) => {
+            setError(err?.response?.data?.message)
+        })
+    }
+}, [loggedIn])
 
     useEffect(() => {
         const token = localStorage.getItem('jwt')
@@ -52,18 +48,18 @@ function App() {
             mainApi.checkToken().then(() => {
                 mainApi.getUserInfo()
                     .then((data) => {
+                        getMovies(token)
+                        getCards(token)
                         setCurrentUser(data.data);
+                        setInit(false)
                     })
-                moviesApi.getMovies()
-                    .then((allMovies) => {
-                        localStorage.setItem('allCards', JSON.stringify(allMovies.data))
-                        setCards(allMovies.data)
-                    })
-                setLoggedIn(true);
-                navigate('/movies');
             }).finally(() => {
                 setLoading(false)
+                setInit(false)
             });
+        }
+        if(!token) {
+            setInit(false)
         }
         // eslint-disable-next-line
     }, []);
@@ -83,27 +79,40 @@ function App() {
                 setLoading(false)
             });
     }
-
+    function getCards() {
+        const token = localStorage.getItem('jwt')
+        mainApi.getCards(token)
+            .then((data) => {
+                setSavedMovies(data.data);
+            })
+            .catch((err) => {
+                setError(err?.response?.data?.message)
+            }).finally(() => {
+            setLoading(false)
+        });
+    }
+    function getMovies(jwt) {
+        moviesApi.getMovies(jwt)
+            .then((allMovies) => {
+                setLoggedIn(true);
+                localStorage.setItem('allCards', JSON.stringify(allMovies))
+                setCards(allMovies)
+                navigate("/movies");
+            }).catch((err) => {
+            setError(err?.response?.data?.message)
+        })
+    }
     function handleLogin({email, password}) {
         setLoading(true)
         return mainApi
             .login(email, password)
-            .then((data) => {
-                if (data.status === 200) {
-                    localStorage.setItem("jwt", data.data.jwt);
-                    mainApi.getUserInfo()
-                        .then((data) => {
-                            setCurrentUser(data.data);
-                        })
-                    moviesApi.getMovies(data.data.jwt)
-                        .then((allMovies) => {
-                            setLoggedIn(true);
-                            localStorage.setItem('allCards', JSON.stringify(allMovies.data))
-                            setCards(allMovies.data)
-                            navigate("/movies");
-                        })
+            .then((datas) => {
+                if (datas.status === 200) {
+                    localStorage.setItem("jwt", datas.data.jwt);
+                    getMovies()
+                    getCards(datas.data.jwt)
+                    setLoggedIn(true)
                 }
-
             })
             .catch((err) => {
                 setError(err?.response?.data?.message)
@@ -133,9 +142,10 @@ function App() {
     }
 
     function handleSaveMovie(card) {
+        const token = localStorage.getItem('jwt')
         setLoading(true)
         mainApi
-            .saveMovie(card)
+            .saveMovie(card, token)
             .then((data) => {
                 setSavedMovies([data.data, ...savedMovies]);
             })
@@ -213,7 +223,8 @@ function App() {
                     </Routes>
                     <Footer/>
                 </CurrentUserContext.Provider>
-                {loading && <Preloader/>}
+                {(loading || init) && <Preloader/>}
+
             </div>
             {error && <Modal onClose={() => setError(null)} error={error}/>}
         </>

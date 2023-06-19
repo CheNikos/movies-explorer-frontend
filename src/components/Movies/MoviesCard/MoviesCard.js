@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
-import deleteImage from "../../../images/card-image/d1.svg";
+import deleteImage from "../../../images/card-image/d1.svg"
 export default function MoviesCard({
   card,
   isSavedMovies,
@@ -33,7 +33,7 @@ export default function MoviesCard({
     if (saved) {
       setIsLike(true);
     } else {
-      setIsLike(false);
+      setIsLike(false)
     }
   }, [saved]);
 
@@ -60,12 +60,9 @@ export default function MoviesCard({
         <div className="movies-card__description">
           <p className="movies-card__name">{card.nameRU}</p>
           {isSavedMovies ? (
-            <img
-              className="movies-card__like-delete"
-              onClick={handleDeleteMovie}
-              src={deleteImage}
-              alt='кнопка удаления лайка'
-            />
+              <img className="movies-card__like-delete"
+                   onClick={handleDeleteMovie}
+                   src={deleteImage}/>
           ) : (
             <button
               type="button"
