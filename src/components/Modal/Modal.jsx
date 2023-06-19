@@ -14,7 +14,7 @@ const Modal = ({error, onClose}) => {
     return (
         <div className={'container'}>
             <span>{error}</span>
-            <img onClick={onClose} src={closeImg}/>
+            <img onClick={onClose} src={closeImg} alt='закрыть модальное окно'/>
         </div>
     );
 };

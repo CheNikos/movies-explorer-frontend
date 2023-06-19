@@ -27,6 +27,7 @@ export default function SavedMovies({ savedMovies, onDeleteMovie}) {
         } else {
             setCurrentCards(savedMovies)
         }
+        // eslint-disable-next-line
     }, [savedMovies])
 
     const onSendEligibleFilm = () => {

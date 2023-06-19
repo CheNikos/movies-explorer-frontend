@@ -8,7 +8,7 @@ const Preloader = () => {
         // Функция обработки события прокрутки
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
+            // const documentHeight = document.documentElement.scrollHeight;
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
             if (scrollTop > windowHeight / 2) {
