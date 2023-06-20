@@ -2,7 +2,7 @@ import {BASE_URL, MOVIES_URL} from "./constants.js";
 import axios from 'axios';
 export const instance = axios.create({
   baseURL: BASE_URL, // Базовый URL для всех запросов
-  /*timeout: 5000, // Таймаут запроса (в миллисекундах)*/
+  timeout: 5000, // Таймаут запроса (в миллисекундах)
   headers: {
      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     'Content-Type': 'application/json',
@@ -35,12 +35,8 @@ class Api {
   }
 
   getCards(jwt) {
-    return fetch(`/movies`, {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'},
-    }).then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-    })
+    axios.defaults.headers.common["authorization"] = `Bearer ${jwt}`;
+    return instance.get(`/movies`)
   };
 
   saveMovie(data) {

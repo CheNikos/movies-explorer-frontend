@@ -1,5 +1,5 @@
 import "./App.css";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext.js";
 import Main from "../Main/Main";
@@ -26,20 +26,21 @@ function App() {
     const [init, setInit] = useState(true);
     const [error, setError] = useState();
     const navigate = useNavigate();
+    const location = useLocation();
 
-useEffect(() => {
-    const token = localStorage.getItem('token')
-    if((token && loggedIn) && !init) {
-        mainApi.getUserInfo(token)
-            .then((data) => {
-                getMovies(token)
-                getCards(token)
-                setCurrentUser(data.data);
-            }).catch((err) => {
-            setError(err?.response?.data?.message)
-        })
-    }
-}, [loggedIn])
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if ((token && loggedIn) && !init) {
+            mainApi.getUserInfo(token)
+                .then((data) => {
+                    getMovies(token)
+                    getCards(token)
+                    setCurrentUser(data.data);
+                }).catch((err) => {
+                setError(err?.response?.data?.message)
+            })
+        }
+    }, [loggedIn])
 
     useEffect(() => {
         const token = localStorage.getItem('jwt')
@@ -52,18 +53,18 @@ useEffect(() => {
                         getCards(token)
                         setCurrentUser(data.data);
                         setInit(false)
+                        navigate(location.pathname)
                     })
             }).finally(() => {
                 setLoading(false)
                 setInit(false)
             });
         }
-        if(!token) {
+        if (!token) {
             setInit(false)
         }
         // eslint-disable-next-line
     }, []);
-
 
 
     function handleRegister({name, email, password}) {
@@ -79,10 +80,12 @@ useEffect(() => {
                 setLoading(false)
             });
     }
+
     function getCards() {
         const token = localStorage.getItem('jwt')
         mainApi.getCards(token)
             .then((data) => {
+                localStorage.setItem('savedMovies', JSON.stringify(data.data))
                 setSavedMovies(data.data);
             })
             .catch((err) => {
@@ -91,25 +94,29 @@ useEffect(() => {
             setLoading(false)
         });
     }
-    function getMovies(jwt) {
-        moviesApi.getMovies(jwt)
+
+    function getMovies(jwt, to = location.pathname) {
+        moviesApi.getMovies()
             .then((allMovies) => {
                 setLoggedIn(true);
                 localStorage.setItem('allCards', JSON.stringify(allMovies))
                 setCards(allMovies)
-                navigate("/movies");
+
+                navigate(to);
             }).catch((err) => {
             setError(err?.response?.data?.message)
         })
     }
+
     function handleLogin({email, password}) {
         setLoading(true)
         return mainApi
             .login(email, password)
             .then((datas) => {
                 if (datas.status === 200) {
+                    console.log(datas.data.jwt)
                     localStorage.setItem("jwt", datas.data.jwt);
-                    getMovies()
+                    getMovies(datas.data.jwt, '/movies')
                     getCards(datas.data.jwt)
                     setLoggedIn(true)
                 }
@@ -122,9 +129,8 @@ useEffect(() => {
     }
 
     function handleSingOut() {
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("allCards");
-        localStorage.removeItem("data");
+        localStorage.clear()
+        navigate('/signin')
     }
 
     function handleUpdateProfile({name, email}) {
@@ -132,7 +138,7 @@ useEffect(() => {
         mainApi
             .updateUserInfo(name, email)
             .then((newUserData) => {
-                setCurrentUser(newUserData);
+                setCurrentUser(newUserData.data);
             })
             .catch((err) => {
                 setError(err?.response?.data?.message)
@@ -147,6 +153,7 @@ useEffect(() => {
         mainApi
             .saveMovie(card, token)
             .then((data) => {
+                localStorage.setItem('savedMovies', JSON.stringify([data.data, ...savedMovies]))
                 setSavedMovies([data.data, ...savedMovies]);
             })
             .catch((err) => {

@@ -12,10 +12,11 @@ export default function SavedMovies({ savedMovies, onDeleteMovie}) {
 
     const [currentCards, setCurrentCards] = useState([])
     useEffect(() => {
+        const moviesSaved = JSON.parse(localStorage.getItem('savedMovies'))
         if(checkBox) {
-            setCurrentCards(sortedCardsShortFilms(savedMovies))
+            setCurrentCards(sortedCardsShortFilms(moviesSaved ?? savedMovies))
         } else {
-            setCurrentCards(savedMovies)
+            setCurrentCards(moviesSaved ?? savedMovies)
         }
     }, [savedMovies])
 
@@ -31,6 +32,11 @@ export default function SavedMovies({ savedMovies, onDeleteMovie}) {
     }
     const onClickCheckBoxHandler = (value) => {
         setCheckBox(value)
+        if(search){
+            const checkShortFilms = value ? sortedCardsShortFilms(savedMovies) : savedMovies
+            setCurrentCards(searchMovies(search?.trim(), checkShortFilms))
+            return
+        }
         if (value){
             setCurrentCards(sortedCardsShortFilms(savedMovies))
         } else {

@@ -11,6 +11,11 @@ export default function MoviesCardList({
   onDeleteMovie,
 }) {
   const [shownMovies, setShownMovies] = useState(0);
+  const [savedMoviesl, setSavedMovies] = useState(0);
+  useEffect(() => {
+    const moviesSaved = JSON.parse(localStorage.getItem('savedMovies'))
+    setSavedMovies(moviesSaved ?? savedMovies)
+  }, [savedMovies])
   const location = useLocation();
   function shownMoviesList() {
     const display = window.innerWidth;
@@ -62,10 +67,10 @@ export default function MoviesCardList({
                 cards={cards}
                 key={card.movieId}
                 isSavedMovies={isSavedMovies}
-                saved={getSavedMovieCard(savedMovies, card)}
+                saved={getSavedMovieCard(savedMoviesl, card)}
                 onSaveMovie={onSaveMovie}
                 onDeleteMovie={onDeleteMovie}
-                savedMovies={savedMovies}
+                savedMovies={savedMoviesl}
               />
             ))
 

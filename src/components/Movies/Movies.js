@@ -24,6 +24,11 @@ export default function Movies({savedMovies, onSaveMovie, onDeleteMovie, cards})
     const onClickCheckBoxHandler = (value) => {
         const allCards = JSON.parse(localStorage.getItem('allCards'))
         setCheckBox(value)
+        if(search){
+            const checkShortFilms = value ? sortedCardsShortFilms(savedMovies) : savedMovies
+            setCurrentCards(searchMovies(search?.trim(), checkShortFilms))
+            return
+        }
         if (value) {
             setCurrentCards(allCards.filter(card => card.duration <= 40))
         } else {
