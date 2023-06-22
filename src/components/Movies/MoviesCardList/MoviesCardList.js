@@ -13,9 +13,9 @@ export default function MoviesCardList({
   const [shownMovies, setShownMovies] = useState(0);
   const [savedMoviesl, setSavedMovies] = useState(0);
   useEffect(() => {
-    const moviesSaved = JSON.parse(localStorage.getItem("savedMovies"));
-    setSavedMovies(moviesSaved ?? savedMovies);
-  }, [savedMovies]);
+    const moviesSaved = JSON.parse(localStorage.getItem('savedMovies'))
+    setSavedMovies(moviesSaved ?? savedMovies)
+  }, [savedMovies])
   const location = useLocation();
   function shownMoviesList() {
     const display = window.innerWidth;
@@ -55,24 +55,26 @@ export default function MoviesCardList({
     return savedMovies?.find((savedMovie) => savedMovie.movieId === card.id);
   }
 
+
   return (
     <>
       {location.pathname === "/saved-movies" ? (
         <>
           <div className="movies-cards">
-            {cards &&
-              cards?.map((card) => (
-                <MoviesCard
-                  card={card}
-                  cards={cards}
-                  key={card.movieId}
-                  isSavedMovies={isSavedMovies}
-                  saved={getSavedMovieCard(savedMoviesl, card)}
-                  onSaveMovie={onSaveMovie}
-                  onDeleteMovie={onDeleteMovie}
-                  savedMovies={savedMoviesl}
-                />
-              ))}
+            {cards && cards?.map((card) => (
+              <MoviesCard
+                card={card}
+                cards={cards}
+                key={card.movieId}
+                isSavedMovies={isSavedMovies}
+                saved={getSavedMovieCard(savedMoviesl, card)}
+                onSaveMovie={onSaveMovie}
+                onDeleteMovie={onDeleteMovie}
+                savedMovies={savedMoviesl}
+              />
+            ))
+
+            }
             {!cards && <div>Не найденно</div>}
           </div>
           <div className="movies-cards__more"></div>
@@ -80,24 +82,20 @@ export default function MoviesCardList({
       ) : (
         <>
           <div className="movies-cards">
-            {cards?.length ? (
-              cards
-                ?.slice(0, shownMovies)
-                ?.map((card) => (
-                  <MoviesCard
-                    card={card}
-                    cards={cards}
-                    key={card.id}
-                    isSavedMovies={isSavedMovies}
-                    saved={getSavedMovieCard(savedMovies, card)}
-                    onSaveMovie={onSaveMovie}
-                    onDeleteMovie={onDeleteMovie}
-                    savedMovies={savedMovies}
-                  />
-                ))
-            ) : (
-              <div>Не найденно</div>
-            )}
+            {cards?.length ? cards?.slice(0, shownMovies)?.map((card) => (
+              <MoviesCard
+                card={card}
+                cards={cards}
+                key={card.id}
+                isSavedMovies={isSavedMovies}
+                saved={getSavedMovieCard(savedMovies, card)}
+                onSaveMovie={onSaveMovie}
+                onDeleteMovie={onDeleteMovie}
+                savedMovies={savedMovies}
+              />
+            )):
+                <div>Не найденно</div>
+            }
           </div>
           <div className="movies-cards__more">
             {cards?.length > shownMovies ? (

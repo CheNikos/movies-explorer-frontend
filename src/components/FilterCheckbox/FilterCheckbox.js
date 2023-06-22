@@ -1,6 +1,6 @@
-import "./FilterCheckbox.css";
+import './FilterCheckbox.css';
 
-export default function FilterCheckbox({ onClick, value }) {
+export default function FilterCheckbox({onClick, value}) {
   return (
     <label className="filter">
       <input

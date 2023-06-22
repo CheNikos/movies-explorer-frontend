@@ -8,6 +8,6 @@ export const PATTERN_USERNAME = "[A-я0-9-\\s]{2,30}";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/;
 
-export const isEmailValid = (value) => {
-  return emailRegex.test(value);
-};
+export const  isEmailValid = (value) => {
+    return emailRegex.test(value)
+}

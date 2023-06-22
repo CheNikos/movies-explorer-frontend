@@ -1,7 +1,7 @@
 import "./BurgerMenu.css";
 import { useLocation, Link } from "react-router-dom";
 
-export default function BurgerMenu({ burger }) {
+export default function BurgerMenu({burger}) {
   const location = useLocation();
 
   return (
@@ -33,11 +33,9 @@ export default function BurgerMenu({ burger }) {
               Сохранённые фильмы
             </Link>
           </li>
-          <li
-            className={`burger__account burger__account_${
+          <li className={`burger__account burger__account_${
               location.pathname === "/profile" ? "active" : ""
-            }`}
-          >
+            }`}>
             <Link to={"/profile"} className="burger__list">
               Аккаунт
             </Link>
