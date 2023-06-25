@@ -140,7 +140,10 @@ function App() {
 
   function handleSingOut() {
     localStorage.clear();
-    navigate("/signin");
+    navigate("/");
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("allMovies");
   }
 
   function handleUpdateProfile({ name, email }) {

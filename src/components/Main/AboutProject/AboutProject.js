@@ -26,12 +26,20 @@ export default function AboutProject() {
         </div>
       </div>
       <div className="about-project__stage">
-        <div className="about-project__stage-complete"><p className="about-project__stage-complete-text">1 неделя</p></div>
-        <div className="about-project__stage-waiting"><p className="about-project__stage-waiting-text">4 недели</p></div>
+        <div className="about-project__stage-complete">
+          <p className="about-project__stage-complete-text">1 неделя</p>
+        </div>
+        <div className="about-project__stage-waiting">
+          <p className="about-project__stage-waiting-text">4 недели</p>
+        </div>
       </div>
       <div className="about-project__subtext">
-        <div className="about-project__subtext-complete"><p className="about-project__stage-subtext-text">Back-end</p></div>
-        <div className="about-project__subtext-waiting"><p className="about-project__stage-subtext-text">Front-end</p></div>
+        <div className="about-project__subtext-complete">
+          <p className="about-project__stage-subtext-text">Back-end</p>
+        </div>
+        <div className="about-project__subtext-waiting">
+          <p className="about-project__stage-subtext-text">Front-end</p>
+        </div>
       </div>
     </div>
   );

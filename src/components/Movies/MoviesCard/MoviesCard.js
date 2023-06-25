@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./MoviesCard.css";
-import { useLocation } from "react-router-dom";
-import deleteImage from "../../../images/card-image/d1.svg"
+import { Link, useLocation } from "react-router-dom";
+import deleteImage from "../../../images/card-image/d1.svg";
 export default function MoviesCard({
   card,
   isSavedMovies,
@@ -33,7 +33,7 @@ export default function MoviesCard({
     if (saved) {
       setIsLike(true);
     } else {
-      setIsLike(false)
+      setIsLike(false);
     }
   }, [saved]);
 
@@ -45,24 +45,31 @@ export default function MoviesCard({
     <ul className="movies-card">
       <li className="movies-card__list">
         {location.pathname === "/movies" ? (
-          <img
-            src={`https://api.nomoreparties.co/${card.image.url}`}
-            alt={card.nameRU}
-            className="movies-card__image"
-          />
+          <Link to={card.trailerLink} target="_blank">
+            <img
+              src={`https://api.nomoreparties.co/${card.image.url}`}
+              alt={card.nameRU}
+              className="movies-card__image"
+            />
+          </Link>
         ) : (
-          <img
-            src={card.image}
-            alt={card.nameRU}
-            className="movies-card__image"
-          />
+          <Link to={card.trailerLink} target="_blank">
+            <img
+              src={card.image}
+              alt={card.nameRU}
+              className="movies-card__image"
+            />
+          </Link>
         )}
         <div className="movies-card__description">
           <p className="movies-card__name">{card.nameRU}</p>
           {isSavedMovies ? (
-              <img className="movies-card__like-delete"
-                   onClick={handleDeleteMovie}
-                   src={deleteImage}/>
+            <img
+              className="movies-card__like-delete"
+              onClick={handleDeleteMovie}
+              src={deleteImage}
+              alt="удалить карточку"
+            />
           ) : (
             <button
               type="button"
