@@ -75,8 +75,8 @@ function App() {
     setLoading(true);
     return mainApi
       .register(name, email, password)
-      .then((data) => {
-        navigate("/signin");
+      .then(() => {
+        handleLogin({ email, password });
       })
       .catch((err) => {
         setError(err?.response?.data?.message);
@@ -164,7 +164,6 @@ function App() {
     mainApi
       .saveMovie(card, token)
       .then((data) => {
-        debugger;
         localStorage.setItem(
           "savedMovies",
           JSON.stringify([data.data, ...savedMovies])
@@ -184,7 +183,6 @@ function App() {
     mainApi
       .deleteMovie(card._id)
       .then((res) => {
-        debugger;
         const oldMovies = JSON.parse(localStorage.getItem("savedMovies"));
         if (oldMovies) {
           const savedMovies = oldMovies?.filter(
