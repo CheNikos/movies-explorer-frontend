@@ -7,6 +7,7 @@ export default function SearchForm({
   onClick,
   onClickCheckBox,
   valueCheckBox,
+  loading,
 }) {
   return (
     <div className="search-form">
@@ -19,8 +20,13 @@ export default function SearchForm({
           value={value}
           onChange={(e) => setValue(e.currentTarget.value)}
           required
+          disabled={loading}
         />
-        <button onClick={onClick} className="search-form__find"></button>
+        <button
+          onClick={onClick}
+          className="search-form__find"
+          disabled={loading}
+        ></button>
       </div>
       <div className="search-form__line"></div>
       <div className="search-form__checkbox">
@@ -28,6 +34,7 @@ export default function SearchForm({
           <FilterCheckbox
             value={valueCheckBox}
             onClick={(e) => onClickCheckBox(e.currentTarget.checked)}
+            loading={loading}
           />
         </div>
         <p className="search-form__filter">Короткометражки</p>

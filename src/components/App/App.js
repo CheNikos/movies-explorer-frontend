@@ -19,57 +19,54 @@ import Modal from "../Modal/Modal";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const token = localStorage.getItem("jwt");
+  const [loggedIn, setLoggedIn] = useState(token !== null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [init, setInit] = useState(true);
   const [error, setError] = useState();
+  const [profileMessage, setProfileMessage] = useState("");
+  const [profileMessageStatus, setProfileMessageStatus] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Перенаправляем пользователя
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token && loggedIn && !init) {
+    if (token && !error) {
+      setLoggedIn(true);
+      if (location.pathname === "/signup" || location.pathname === "/signin") {
+        navigate("/movies");
+      } else {
+        navigate(location.pathname);
+      }
+    }
+  }, [token, loggedIn, navigate, location.pathname, error]);
+
+  // Устанавливаем пользователя
+  useEffect(() => {
+    if (loggedIn) {
       mainApi
         .getUserInfo(token)
         .then((data) => {
-          getMovies(token);
-          getCards(token);
           setCurrentUser(data.data);
         })
         .catch((err) => {
           setError(err?.response?.data?.message);
-        });
+          setLoggedIn(false);
+          navigate("/signin");
+        })
+        .finally(() => {});
+    }
+  }, [token, loggedIn, navigate]);
+
+  // Получаем фильмы
+  useEffect(() => {
+    if (loggedIn) {
+      getMovies(token);
+      getCards(token);
     }
     // eslint-disable-next-line
   }, [loggedIn]);
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      setLoading(true);
-      mainApi
-        .checkToken()
-        .then(() => {
-          mainApi.getUserInfo().then((data) => {
-            getMovies(token);
-            getCards(token);
-            setCurrentUser(data.data);
-            setInit(false);
-            navigate(location.pathname);
-          });
-        })
-        .finally(() => {
-          setLoading(false);
-          setInit(false);
-        });
-    }
-    if (!token) {
-      setInit(false);
-    }
-    // eslint-disable-next-line
-  }, []);
 
   function handleRegister({ name, email, password }) {
     setLoading(true);
@@ -87,7 +84,7 @@ function App() {
   }
 
   function getCards() {
-    const token = localStorage.getItem("jwt");
+    setLoading(true);
     mainApi
       .getCards(token)
       .then((data) => {
@@ -102,31 +99,29 @@ function App() {
       });
   }
 
-  function getMovies(jwt, to = location.pathname) {
+  function getMovies() {
+    setLoading(true);
     moviesApi
       .getMovies()
       .then((allMovies) => {
-        setLoggedIn(true);
         localStorage.setItem("allCards", JSON.stringify(allMovies));
         setCards(allMovies);
-
-        navigate(to);
       })
       .catch((err) => {
         setError(err?.response?.data?.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
   function handleLogin({ email, password }) {
     setLoading(true);
-    return mainApi
+    mainApi
       .login(email, password)
       .then((datas) => {
         if (datas.status === 200) {
-          console.log(datas.data.jwt);
           localStorage.setItem("jwt", datas.data.jwt);
-          getMovies(datas.data.jwt, "/movies");
-          getCards(datas.data.jwt);
           setLoggedIn(true);
         }
       })
@@ -140,10 +135,9 @@ function App() {
 
   function handleSingOut() {
     localStorage.clear();
-    navigate("/");
     setLoggedIn(false);
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("allMovies");
+    navigate("/");
+    setCurrentUser({});
   }
 
   function handleUpdateProfile({ name, email }) {
@@ -152,9 +146,11 @@ function App() {
       .updateUserInfo(name, email)
       .then((newUserData) => {
         setCurrentUser(newUserData.data);
+        showProfileMessage("Данные успешно сохранены", "success");
       })
       .catch((err) => {
         setError(err?.response?.data?.message);
+        showProfileMessage(err?.response?.data?.message, "error");
       })
       .finally(() => {
         setLoading(false);
@@ -162,7 +158,6 @@ function App() {
   }
 
   function handleSaveMovie(card) {
-    const token = localStorage.getItem("jwt");
     setLoading(true);
     mainApi
       .saveMovie(card, token)
@@ -201,6 +196,11 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  function showProfileMessage(message, status) {
+    setProfileMessage(message);
+    setProfileMessageStatus(status);
   }
 
   return (
@@ -243,6 +243,9 @@ function App() {
                   handleSingOut={handleSingOut}
                   component={Profile}
                   onSubmit={handleUpdateProfile}
+                  message={profileMessage}
+                  messageStatus={profileMessageStatus}
+                  loading={loading}
                 />
               }
             />
@@ -258,7 +261,7 @@ function App() {
           </Routes>
           <Footer />
         </CurrentUserContext.Provider>
-        {(loading || init) && <Preloader />}
+        {loading && <Preloader />}
       </div>
       {error && <Modal onClose={() => setError(null)} error={error} />}
     </>

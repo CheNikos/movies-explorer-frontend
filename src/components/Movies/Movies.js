@@ -1,8 +1,9 @@
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchMovies, sortedCardsShortFilms } from "../../utils/utils";
+import { MAX_SHORT_MOVIE_DURATION } from "../../utils/constants";
 
 export default function Movies({
   savedMovies,
@@ -12,20 +13,57 @@ export default function Movies({
 }) {
   const [checkBox, setCheckBox] = useState(false);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [currentCards, setCurrentCards] = useState({});
 
-  const [currentCards, setCurrentCards] = useState(
-    JSON.parse(localStorage.getItem("allCards")) ?? cards
-  );
+  useEffect(() => {
+    const queryData = localStorage.getItem("queryData");
+    if (queryData) {
+      setSearch(JSON.parse(queryData)?.search);
+      setCheckBox(JSON.parse(queryData)?.checkBox);
+    }
+  }, []);
+
+  useEffect(() => {
+    const queryData = localStorage.getItem("queryData");
+    const searchFilms = JSON.parse(queryData)?.searchFilms || cards;
+    checkBox
+      ? setCurrentCards(sortedCardsShortFilms(searchFilms))
+      : setCurrentCards(searchFilms);
+  }, [checkBox, cards]);
+
+  useEffect(() => {
+    const queryData = localStorage.getItem("queryData");
+    if (queryData) {
+      const newQueryData = JSON.parse(queryData);
+      newQueryData.checkBox = checkBox;
+      localStorage.setItem("queryData", JSON.stringify(newQueryData));
+    }
+  }, [checkBox]);
 
   const onSendEligibleFilm = () => {
-    const allCards = JSON.parse(localStorage.getItem("allCards"));
-    if (search) {
-      const checkShortFilms = checkBox
-        ? sortedCardsShortFilms(allCards)
-        : allCards;
-      setCurrentCards(searchMovies(search?.trim(), checkShortFilms));
-    } else {
-      setCurrentCards(allCards);
+    try {
+      setLoading(true);
+      let searchFilms = JSON.parse(localStorage.getItem("allCards"));
+
+      if (search) {
+        searchFilms = searchMovies(search.trim(), searchFilms);
+      }
+
+      setCurrentCards(
+        checkBox ? sortedCardsShortFilms(searchFilms) : searchFilms
+      );
+
+      const queryData = {
+        searchFilms,
+        search,
+        checkBox,
+      };
+      localStorage.setItem("queryData", JSON.stringify(queryData));
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
     }
   };
 
@@ -34,17 +72,20 @@ export default function Movies({
     setCheckBox(value);
     if (search) {
       const checkShortFilms = value
-        ? sortedCardsShortFilms(savedMovies)
-        : savedMovies;
+        ? sortedCardsShortFilms(allCards)
+        : allCards;
       setCurrentCards(searchMovies(search?.trim(), checkShortFilms));
       return;
     }
     if (value) {
-      setCurrentCards(allCards.filter((card) => card.duration <= 40));
+      setCurrentCards(
+        allCards.filter((card) => card.duration <= MAX_SHORT_MOVIE_DURATION)
+      );
     } else {
       setCurrentCards(allCards);
     }
   };
+
   return (
     <main className="movies">
       <SearchForm
@@ -53,6 +94,7 @@ export default function Movies({
         onClick={onSendEligibleFilm}
         value={search}
         setValue={setSearch}
+        loading={loading}
       />
       <MoviesCardList
         cards={currentCards}

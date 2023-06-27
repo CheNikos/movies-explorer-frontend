@@ -4,11 +4,15 @@ export const instance = axios.create({
   baseURL: BASE_URL, // Базовый URL для всех запросов
   timeout: 5000, // Таймаут запроса (в миллисекундах)
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     "Content-Type": "application/json",
   },
 });
 class Api {
+  constructor({ baseUrl, headers }) {
+    this.baseUrl = baseUrl;
+    this.headers = headers;
+  }
+
   _getResponse = (res) => {
     return res.ok ? res.json() : res;
   };
@@ -26,7 +30,7 @@ class Api {
   };
 
   getUserInfo(token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return instance.get("/users/me");
   }
 
@@ -35,7 +39,7 @@ class Api {
   }
 
   getCards(jwt) {
-    axios.defaults.headers.common["authorization"] = `Bearer ${jwt}`;
+    instance.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
     return instance.get(`/movies`);
   }
 
@@ -66,6 +70,10 @@ class Api {
 
 const mainApi = new Api({
   baseUrl: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    "Content-Type": "application/json",
+  },
 });
 
 export default mainApi;

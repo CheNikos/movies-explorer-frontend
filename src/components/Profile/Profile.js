@@ -5,7 +5,13 @@ import useFormValidation from "../../hooks/useForm";
 import { PATTERN_EMAIL, PATTERN_USERNAME } from "../../utils/constants";
 import "./Profile.css";
 
-export default function Profile({ handleSingOut, onSubmit }) {
+export default function Profile({
+  handleSingOut,
+  onSubmit,
+  message,
+  messageStatus,
+  loading,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -51,6 +57,7 @@ export default function Profile({ handleSingOut, onSubmit }) {
               pattern={PATTERN_USERNAME}
               required
               onChange={handleInputChange}
+              disabled={loading}
             />
           </div>
           <div className="profile__line"></div>
@@ -67,12 +74,20 @@ export default function Profile({ handleSingOut, onSubmit }) {
               pattern={PATTERN_EMAIL}
               required
               onChange={handleInputChange}
+              disabled={loading}
             />
+          </div>
+          <div
+            className={`profile__status ${
+              messageStatus ? `profile__status_${messageStatus}` : ""
+            }`}
+          >
+            {message}
           </div>
           <button
             className="profile__edit"
             type="submit"
-            disabled={isButtonDisabled}
+            disabled={isButtonDisabled || loading}
           >
             Редактировать
           </button>
@@ -82,6 +97,7 @@ export default function Profile({ handleSingOut, onSubmit }) {
             className="profile__exit"
             type="button"
             onClick={handleSingOut}
+            disabled={loading}
           >
             Выйти из аккаунта
           </button>

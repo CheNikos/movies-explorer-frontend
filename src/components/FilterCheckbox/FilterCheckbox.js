@@ -1,13 +1,14 @@
 import "./FilterCheckbox.css";
 
-export default function FilterCheckbox({ onClick, value }) {
+export default function FilterCheckbox({ onClick, value, loading }) {
   return (
     <label className="filter">
       <input
-        value={value}
-        onClick={onClick}
+        checked={value}
+        onChange={onClick}
         className="filter__checkbox"
         type="checkbox"
+        disabled={loading}
       />
       <span className="filter__tumbler"></span>
     </label>

@@ -2,6 +2,11 @@ import "./MoviesCardList.css";
 import React, { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
+import {
+  MOVIE_NUMBER,
+  SCREEN_BREAKPOINT,
+  MESSAGES,
+} from "../../../utils/constants";
 
 export default function MoviesCardList({
   cards,
@@ -19,14 +24,14 @@ export default function MoviesCardList({
   const location = useLocation();
   function shownMoviesList() {
     const display = window.innerWidth;
-    if (display > 1279) {
-      setShownMovies(16);
-    } else if (display > 1023) {
-      setShownMovies(12);
-    } else if (display > 767) {
-      setShownMovies(8);
-    } else if (display < 767) {
-      setShownMovies(5);
+    if (display > SCREEN_BREAKPOINT.LAPTOP) {
+      setShownMovies(MOVIE_NUMBER.EXTRA_LARGE.DEFAULT);
+    } else if (display > SCREEN_BREAKPOINT.TABLET) {
+      setShownMovies(MOVIE_NUMBER.LARGE.DEFAULT);
+    } else if (display > SCREEN_BREAKPOINT.SMARTPHONE) {
+      setShownMovies(MOVIE_NUMBER.MEDIUM.DEFAULT);
+    } else if (display < SCREEN_BREAKPOINT.SMARTPHONE) {
+      setShownMovies(MOVIE_NUMBER.SMALL.DEFAULT);
     }
   }
 
@@ -42,12 +47,12 @@ export default function MoviesCardList({
 
   function showMore() {
     const display = window.innerWidth;
-    if (display > 1279) {
-      setShownMovies(shownMovies + 4);
-    } else if (display > 1023) {
-      setShownMovies(shownMovies + 3);
-    } else if (display < 1023) {
-      setShownMovies(shownMovies + 2);
+    if (display > SCREEN_BREAKPOINT.LAPTOP) {
+      setShownMovies(shownMovies + MOVIE_NUMBER.EXTRA_LARGE.ADD);
+    } else if (display > SCREEN_BREAKPOINT.TABLET) {
+      setShownMovies(shownMovies + MOVIE_NUMBER.LARGE.ADD);
+    } else if (display < SCREEN_BREAKPOINT.TABLET) {
+      setShownMovies(shownMovies + MOVIE_NUMBER.MEDIUM.ADD);
     }
   }
 
@@ -73,7 +78,7 @@ export default function MoviesCardList({
                   savedMovies={savedMoviesl}
                 />
               ))}
-            {!cards && <div>Не найденно</div>}
+            {!cards && <div>MESSAGES.MOVIE_NOT_FOUND</div>}
           </div>
           <div className="movies-cards__more"></div>
         </>
@@ -96,7 +101,7 @@ export default function MoviesCardList({
                   />
                 ))
             ) : (
-              <div>Не найденно</div>
+              <div>{MESSAGES.MOVIE_NOT_FOUND}</div>
             )}
           </div>
           <div className="movies-cards__more">
