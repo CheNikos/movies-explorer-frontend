@@ -45,6 +45,8 @@
   border: none;
   width: 122px;
   text-align: end;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .profile__input-content:first-child {
@@ -80,6 +82,22 @@
   color: rgba(238, 52, 101, 1);
   background-color: #ffffff;
   cursor: pointer;
+}
+
+.profile__status {
+  margin-top: 15px;
+  font-size: 12px;
+  display: none;
+}
+
+.profile__status_success {
+  color: rgb(107, 197, 107);
+  display: block;
+}
+
+.profile__status_error {
+  color: rgb(107, 197, 107);
+  display: block;
 }
 
 @media screen and (max-width: 768px) {

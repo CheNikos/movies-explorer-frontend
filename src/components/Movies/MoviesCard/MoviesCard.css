@@ -43,8 +43,15 @@
   background-position: center;
 }
 
-.movies-card__like:focus {
+.movies-card__like_active {
   background-image: url(../../../images/card-image/icon__COLOR_main-3.svg);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
 }
 
 .movies-card__like-delete {

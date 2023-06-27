@@ -1,24 +1,63 @@
 import { Link } from "react-router-dom";
+import { useContext, useState, useCallback, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import useFormValidation from "../../hooks/useForm";
+import { PATTERN_EMAIL, PATTERN_USERNAME } from "../../utils/constants";
 import "./Profile.css";
 
-export default function Profile() {
+export default function Profile({
+  handleSingOut,
+  onSubmit,
+  message,
+  messageStatus,
+  loading,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { values, setValues, handleInputChange, isValid } = useFormValidation();
+
+  const checkStatusSubmit = useCallback(() => {
+    return (
+      !isValid ||
+      (values.name === currentUser.name) & (values.email === currentUser.email)
+    );
+  }, [isValid, values, currentUser]);
+
+  useEffect(() => {
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [setValues, currentUser]);
+
+  useEffect(() => {
+    setIsButtonDisabled(checkStatusSubmit());
+  }, [checkStatusSubmit]);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    setIsButtonDisabled(true);
+    onSubmit(values);
+    checkStatusSubmit();
+  }
+
   return (
     <section className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">Привет, Николай!</h1>
-        <form className="profile__form">
+        <h1 className="profile__title">Привет, {`${currentUser?.name}`}!</h1>
+        <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__input-content">
             <label className="profile__label" htmlFor="name">
               Имя
             </label>
             <input
+              value={values.name || ""}
               className="profile__input"
+              name="name"
+              id="name"
               type="text"
-              minLength="2"
-              maxLength="30"
-              autoComplete="on"
-              defaultValue="Николай"
+              pattern={PATTERN_USERNAME}
               required
+              onChange={handleInputChange}
+              disabled={loading}
             />
           </div>
           <div className="profile__line"></div>
@@ -27,20 +66,41 @@ export default function Profile() {
               E-mail
             </label>
             <input
+              value={values.email || ""}
               className="profile__input"
+              name="email"
+              id="email"
               type="email"
-              autoComplete="on"
-              defaultValue="pochta@yandex.ru"
+              pattern={PATTERN_EMAIL}
               required
+              onChange={handleInputChange}
+              disabled={loading}
             />
           </div>
-          <button className="profile__edit" type="submit">
+          <div
+            className={`profile__status ${
+              messageStatus ? `profile__status_${messageStatus}` : ""
+            }`}
+          >
+            {message}
+          </div>
+          <button
+            className="profile__edit"
+            type="submit"
+            disabled={isButtonDisabled || loading}
+          >
             Редактировать
           </button>
         </form>
-        <Link to={"/signin"}><button className="profile__exit" type="button">
-          Выйти из аккаунта
-        </button>
+        <Link to={"/"}>
+          <button
+            className="profile__exit"
+            type="button"
+            onClick={handleSingOut}
+            disabled={loading}
+          >
+            Выйти из аккаунта
+          </button>
         </Link>
       </div>
     </section>

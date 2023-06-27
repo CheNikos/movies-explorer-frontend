@@ -5,7 +5,10 @@
   padding-left: 30px;
   padding-right: 30px;
 }
-
+.errorField {
+  color: red;
+  margin-top: 10px;
+}
 .signup__header {
   display: block;
   max-width: 396px;
